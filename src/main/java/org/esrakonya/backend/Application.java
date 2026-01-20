@@ -1,6 +1,11 @@
 package org.esrakonya.backend;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Application {
+
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
         String environment = System.getenv("APP_ENV");
@@ -9,6 +14,6 @@ public class Application {
             environment = "local";
         }
 
-        System.out.println("Application started in environment: " +environment);
+        logger.info("Application started in environment: {}", environment);
     }
 }
