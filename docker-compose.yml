@@ -6,8 +6,8 @@ services:
     environment:
       # These credentials will be used by our Spring Boot app later
       - POSTGRES_DB=marketplace_db
-      - POSTGRES_USER=esra_user
-      - POSTGRES_PASSWORD=secret_password
+      - POSTGRES_USER=esra
+      - POSTGRES_PASSWORD=esra1234
     ports:
       - "5432:5432"
     volumes:

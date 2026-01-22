@@ -1,4 +1,4 @@
-package org.esrakonya.backend.dto;
+package org.esrakonya.backend.health.dto;
 
 
 import lombok.AllArgsConstructor;

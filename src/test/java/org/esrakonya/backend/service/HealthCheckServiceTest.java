@@ -1,8 +1,8 @@
 package org.esrakonya.backend.service;
 
-import org.esrakonya.backend.dto.HealthStatusResponse;
+import org.esrakonya.backend.health.dto.HealthStatusResponse;
+import org.esrakonya.backend.health.HealthCheckService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

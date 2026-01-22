@@ -1,8 +1,8 @@
-package org.esrakonya.backend.controller;
+package org.esrakonya.backend.health;
 
 import lombok.RequiredArgsConstructor;
-import org.esrakonya.backend.dto.HealthStatusResponse;
-import org.esrakonya.backend.service.HealthCheckService;
+import org.esrakonya.backend.health.dto.HealthStatusResponse;
+import org.esrakonya.backend.health.HealthCheckService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

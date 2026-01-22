@@ -13,12 +13,13 @@ public class Application {
     public static void main(String[] args) {
         var context = SpringApplication.run(Application.class, args);
 
-        String port = context.getEnvironment().getProperty("local.server.port");
-        String dbUrl = context.getEnvironment().getProperty("spring.datasource.url");
+        logger.error(">>> DATASOURCE URL = {}",
+                context.getEnvironment().getProperty("spring.datasource.url"));
 
-        logger.info("**********************************************************");
-        logger.info("  SPRING BOOT ENGINE IS LIVE ON 8080 PORT {}", port);
-        logger.info("  DATABASE URL: {}", dbUrl);
-        logger.info("**********************************************************");
+        logger.error(">>> DATASOURCE USER = {}",
+                context.getEnvironment().getProperty("spring.datasource.username"));
+
+        logger.error(">>> SERVER PORT = {}",
+                context.getEnvironment().getProperty("server.port"));
     }
 }
