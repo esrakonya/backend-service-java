@@ -11,11 +11,14 @@ public class Application {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
-        // This is the core line that starts Spring Boot and Tomcat
-        SpringApplication.run(Application.class, args);
+        var context = SpringApplication.run(Application.class, args);
+
+        String port = context.getEnvironment().getProperty("local.server.port");
+        String dbUrl = context.getEnvironment().getProperty("spring.datasource.url");
 
         logger.info("**********************************************************");
-        logger.info("  SPRING BOOT ENGINE IS LIVE ON PORT 8080");
+        logger.info("  SPRING BOOT ENGINE IS LIVE ON 8080 PORT {}", port);
+        logger.info("  DATABASE URL: {}", dbUrl);
         logger.info("**********************************************************");
     }
 }

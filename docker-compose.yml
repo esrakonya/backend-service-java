@@ -1,0 +1,16 @@
+services:
+  #Database Service
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: marketplace-postgres
+    environment:
+      # These credentials will be used by our Spring Boot app later
+      - POSTGRES_DB=marketplace_db
+      - POSTGRES_USER=esra_user
+      - POSTGRES_PASSWORD=secret_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:

@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca968ea9-2f93-4147-93d5-440f19e01704" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/esrakonya/backend/service/HealthCheckServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/controller/HealthCheckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/controller/HealthCheckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/service/HealthCheckService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/service/HealthCheckService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/esrakonya/backend/service/HealthCheckServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/esrakonya/backend/service/HealthCheckServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
