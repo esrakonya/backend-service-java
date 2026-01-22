@@ -6,6 +6,8 @@ import org.esrakonya.backend.product.dto.ProductRequest;
 import org.esrakonya.backend.product.dto.ProductResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -32,5 +34,18 @@ public class ProductService {
                 .price(savedProduct.getPrice())
                 .createdAt(savedProduct.getCreatedAt())
                 .build();
+    }
+
+    public List<ProductResponse> getAllProducts() {
+        return productRepository.findAll()
+                .stream()
+                .map(product -> ProductResponse.builder()
+                        .id(product.getId())
+                        .name(product.getName())
+                        .description(product.getDescription())
+                        .price(product.getPrice())
+                        .createdAt(product.getCreatedAt())
+                        .build())
+                .toList();
     }
 }
