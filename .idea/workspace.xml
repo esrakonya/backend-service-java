@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca968ea9-2f93-4147-93d5-440f19e01704" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/exception/ResourceNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/exception/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/ProductService.java" afterDir="false" />
     </list>

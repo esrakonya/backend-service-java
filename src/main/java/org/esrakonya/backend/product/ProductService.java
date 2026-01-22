@@ -61,4 +61,34 @@ public class ProductService {
                 .createdAt(entity.getCreatedAt())
                 .build();
     }
+
+    @Transactional
+    public ProductResponse updateProduct(Long id, ProductRequest request) {
+        // Check if product exists
+        ProductEntity existingProduct = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cannot update. Product not found with id: " + id));
+
+        // Update fields
+        existingProduct.setName(request.getName());
+        existingProduct.setDescription(request.getDescription());
+        existingProduct.setPrice(request.getPrice());
+
+        // Save and map back
+        ProductEntity updatedProduct = productRepository.save(existingProduct);
+        return ProductResponse.builder()
+                .id(updatedProduct.getId())
+                .name(updatedProduct.getName())
+                .description(updatedProduct.getDescription())
+                .price(updatedProduct.getPrice())
+                .createdAt(updatedProduct.getCreatedAt())
+                .build();
+    }
+
+
+    @Transactional
+    public void deleteProduct(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Cannot delete. Product not found with id: " + id);
+        }
+        productRepository.deleteById(id);
+    }
 }
