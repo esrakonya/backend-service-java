@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.esrakonya.backend.common.exception.ResourceNotFoundException;
 import org.esrakonya.backend.product.dto.ProductRequest;
 import org.esrakonya.backend.product.dto.ProductResponse;
+import org.esrakonya.backend.product.mapper.ProductMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,52 +17,24 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
     @Transactional
     public ProductResponse createProduct(ProductRequest request) {
-        // Map DTO to Entity
-        ProductEntity productEntity = ProductEntity.builder()
-                .name(request.getName())
-                .description(request.getDescription())
-                .price(request.getPrice())
-                .build();
-
-        // Save to Database
-        ProductEntity savedProduct = productRepository.save(productEntity);
-
-        // Map Entity back to Response DTO
-        return ProductResponse.builder()
-                .id(savedProduct.getId())
-                .name(savedProduct.getName())
-                .description(savedProduct.getDescription())
-                .price(savedProduct.getPrice())
-                .createdAt(savedProduct.getCreatedAt())
-                .build();
+        ProductEntity entity = productMapper.toEntity(request);
+        ProductEntity saved = productRepository.save(entity);
+        return productMapper.toResponse(saved);
     }
 
-    public List<ProductResponse> getAllProducts() {
-        return productRepository.findAll()
-                .stream()
-                .map(product -> ProductResponse.builder()
-                        .id(product.getId())
-                        .name(product.getName())
-                        .description(product.getDescription())
-                        .price(product.getPrice())
-                        .createdAt(product.getCreatedAt())
-                        .build())
-                .toList();
+    public Page<ProductResponse> getAllProducts(Pageable pageable) {
+        return productRepository.findAll(pageable)
+                .map(productMapper::toResponse);
     }
 
     public ProductResponse getProductById(Long id) {
         ProductEntity entity = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
 
-        return ProductResponse.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .description(entity.getDescription())
-                .price(entity.getPrice())
-                .createdAt(entity.getCreatedAt())
-                .build();
+        return productMapper.toResponse(entity);
     }
 
     @Transactional
@@ -68,19 +43,11 @@ public class ProductService {
         ProductEntity existingProduct = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cannot update. Product not found with id: " + id));
 
         // Update fields
-        existingProduct.setName(request.getName());
-        existingProduct.setDescription(request.getDescription());
-        existingProduct.setPrice(request.getPrice());
+        productMapper.updateEntityFromRequest(request, existingProduct);
 
         // Save and map back
         ProductEntity updatedProduct = productRepository.save(existingProduct);
-        return ProductResponse.builder()
-                .id(updatedProduct.getId())
-                .name(updatedProduct.getName())
-                .description(updatedProduct.getDescription())
-                .price(updatedProduct.getPrice())
-                .createdAt(updatedProduct.getCreatedAt())
-                .build();
+        return productMapper.toResponse(updatedProduct);
     }
 
 
