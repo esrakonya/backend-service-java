@@ -2,6 +2,7 @@ package org.esrakonya.backend.product;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.esrakonya.backend.common.exception.ResourceNotFoundException;
 import org.esrakonya.backend.product.dto.ProductRequest;
 import org.esrakonya.backend.product.dto.ProductResponse;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,17 @@ public class ProductService {
                         .createdAt(product.getCreatedAt())
                         .build())
                 .toList();
+    }
+
+    public ProductResponse getProductById(Long id) {
+        ProductEntity entity = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+
+        return ProductResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .price(entity.getPrice())
+                .createdAt(entity.getCreatedAt())
+                .build();
     }
 }
