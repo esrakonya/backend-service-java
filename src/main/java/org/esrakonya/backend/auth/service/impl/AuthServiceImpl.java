@@ -77,10 +77,8 @@ public class AuthServiceImpl implements AuthService {
 
         UserEntity savedUser = userService.createUser(userEntity);
 
-        return AuthResponse.builder()
-                .accessToken(tokenService.generateToken(savedUser))
-                .email(savedUser.getEmail())
-                .roles(savedUser.getRoles().stream().map(Enum::name).collect(Collectors.toSet()))
-                .build();
+        String token = tokenService.generateToken(savedUser);
+
+        return authMapper.toResponse(savedUser, token);
     }
 }

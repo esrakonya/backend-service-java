@@ -3,6 +3,7 @@ package org.esrakonya.backend.inventory.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.esrakonya.backend.common.dto.MessageResponse;
 import org.esrakonya.backend.inventory.service.InventoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,8 @@ public class InventoryController {
             summary = "Process a sale",
             description = "Decreases stock using Pessimistic Locking to ensure data integrity."
     )
-    public ResponseEntity<String> processSale(@PathVariable Long productId, @RequestParam Integer quantity) {
+    public ResponseEntity<MessageResponse> processSale(@PathVariable Long productId, @RequestParam Integer quantity) {
         inventoryService.updateStock(productId, quantity);
-        return ResponseEntity.ok("Sale processed successfully. Stock updated.");
+        return ResponseEntity.ok(new MessageResponse("Sale processed and stock updated successfully."));
     }
 }

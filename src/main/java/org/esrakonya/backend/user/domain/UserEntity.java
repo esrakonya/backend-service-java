@@ -5,13 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.experimental.SuperBuilder;
+import org.esrakonya.backend.common.domain.BaseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,9 +20,8 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@EntityListeners(AuditingEntityListener.class)
-public class UserEntity implements UserDetails {
+@SuperBuilder
+public class UserEntity extends BaseEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +32,6 @@ public class UserEntity implements UserDetails {
 
     @Column(nullable = false)
     private String password;
-
-    @CreatedDate
-    @Column(updatable = false, nullable = false)
-    private LocalDateTime createdAt;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)

@@ -34,6 +34,7 @@ public class ProductController {
                     @ApiResponse(responseCode = "403", description = "Forbidden - Admin access required")
             }
     )
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProductResponse> createProduct(@Valid @RequestBody ProductRequest request) {
         ProductResponse response = productService.createProduct(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);

@@ -2,6 +2,8 @@ package org.esrakonya.backend.product.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.esrakonya.backend.common.domain.BaseEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,8 +13,8 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class ProductEntity {
+@SuperBuilder
+public class ProductEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,20 +28,11 @@ public class ProductEntity {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
+    @Column(nullable = false)
+    private Integer stockQuantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
-
-    @Column(nullable = false)
-    private Integer stockQuantity;
-
 
 }

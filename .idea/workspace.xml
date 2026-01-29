@@ -5,77 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca968ea9-2f93-4147-93d5-440f19e01704" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/dto/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/exception/InvalidCredentialsException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/mapper/AuthMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/service/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/service/impl/AuthServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/event/ProductCreatedEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/event/ProductSoldEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/exception/ResourceAlreadyExistsException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/config/AppProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/config/JwtProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/config/SecurityProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/controller/InventoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/domain/InventoryEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/repository/InventoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/service/InventoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/service/impl/InventoryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/notification/ProductNotificationConsumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/controller/CategoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/domain/CategoryEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/dto/CategoryRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/dto/CategoryResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/mapper/CategoryMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/repository/CategoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/service/CategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/service/impl/CategoryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/security/config/CacheConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/security/config/OpenApiConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/security/filter/JwtAuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/security/service/TokenService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/security/user/CustomUserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/domain/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/dto/UserResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/mapper/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application-test.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/import.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/esrakonya/backend/BaseIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/esrakonya/backend/product/ProductIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/domain/BaseEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/dto/MessageResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/exception/InsufficientStockException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/dto/AuthResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/dto/AuthResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/dto/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/dto/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/mapper/AuthMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/mapper/AuthMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/service/impl/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/auth/service/impl/AuthServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/security/ApplicationSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/security/config/ApplicationSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/security/JwtAuthenticationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/security/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/security/service/JwtTokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/common/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/security/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/health/HealthCheckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/health/controller/HealthCheckController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/health/HealthCheckService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/health/service/HealthCheckService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/domain/ProductEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/dto/ProductRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/dto/ProductRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/dto/ProductResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/dto/ProductResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/mapper/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/mapper/ProductMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/domain/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/dto/UserRegistrationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/dto/UserRegistrationRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/esrakonya/backend/service/HealthCheckServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/esrakonya/backend/health/HealthCheckServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/controller/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/controller/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/domain/InventoryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/domain/InventoryEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/service/impl/InventoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/inventory/service/impl/InventoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/domain/CategoryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/domain/CategoryEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/domain/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/product/domain/ProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/domain/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/esrakonya/backend/user/domain/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/esrakonya/backend/product/ProductIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/esrakonya/backend/product/ProductIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

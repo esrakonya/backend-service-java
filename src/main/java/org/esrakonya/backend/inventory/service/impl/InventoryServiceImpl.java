@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.esrakonya.backend.common.exception.ResourceNotFoundException;
 import org.esrakonya.backend.inventory.domain.InventoryEntity;
+import org.esrakonya.backend.inventory.exception.InsufficientStockException;
 import org.esrakonya.backend.inventory.repository.InventoryRepository;
 import org.esrakonya.backend.inventory.service.InventoryService;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,6 @@ public class InventoryServiceImpl implements InventoryService {
         InventoryEntity inventory = InventoryEntity.builder()
                 .productId(productId)
                 .availableQuantity(quantity)
-                .lastUpdated(LocalDateTime.now())
                 .build();
 
         inventoryRepository.save(inventory);
@@ -45,12 +45,11 @@ public class InventoryServiceImpl implements InventoryService {
                 .orElseThrow(() -> new ResourceNotFoundException("Inventory not found for product: " + productId));
 
         if (inventory.getAvailableQuantity() < quantitySubtract) {
-            throw new RuntimeException("Insufficient stock for product ID: " + productId);
+            throw new InsufficientStockException("Product " + productId + " has insufficient stock.");
         }
 
         int newStock = inventory.getAvailableQuantity() - quantitySubtract;
         inventory.setAvailableQuantity(newStock);
-        inventory.setLastUpdated(LocalDateTime.now());
 
         inventoryRepository.save(inventory);
 
