@@ -1,25 +1,19 @@
 package org.esrakonya.backend;
 
+import org.esrakonya.backend.config.AppProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableJpaAuditing
+@EnableConfigurationProperties(AppProperties.class)
 public class Application {
 
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
-
     public static void main(String[] args) {
-        var context = SpringApplication.run(Application.class, args);
-
-        logger.error(">>> DATASOURCE URL = {}",
-                context.getEnvironment().getProperty("spring.datasource.url"));
-
-        logger.error(">>> DATASOURCE USER = {}",
-                context.getEnvironment().getProperty("spring.datasource.username"));
-
-        logger.error(">>> SERVER PORT = {}",
-                context.getEnvironment().getProperty("server.port"));
+        SpringApplication.run(Application.class, args);
     }
 }

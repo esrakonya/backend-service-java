@@ -1,6 +1,9 @@
 package org.esrakonya.backend.product.mapper;
 
-import org.esrakonya.backend.product.ProductEntity;
+import org.esrakonya.backend.product.domain.CategoryEntity;
+import org.esrakonya.backend.product.domain.ProductEntity;
+import org.esrakonya.backend.product.dto.CategoryRequest;
+import org.esrakonya.backend.product.dto.CategoryResponse;
 import org.esrakonya.backend.product.dto.ProductRequest;
 import org.esrakonya.backend.product.dto.ProductResponse;
 import org.mapstruct.Mapper;
@@ -13,12 +16,17 @@ public interface ProductMapper {
     // Converts Request DTO to Entity
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "category", ignore = true)
     ProductEntity toEntity(ProductRequest request);
 
     // Converts Entity to Response DTO
+    @Mapping(target = "categoryName", source = "category.name")
+    @Mapping(target = "categoryId", source = "category.id")
     ProductResponse toResponse(ProductEntity entity);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "category", ignore = true)
     void updateEntityFromRequest(ProductRequest request, @MappingTarget ProductEntity entity);
+
 }
