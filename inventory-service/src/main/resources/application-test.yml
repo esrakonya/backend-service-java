@@ -1,0 +1,27 @@
+server:
+  port: 0 # Senior Move: Dynamic port allocation
+
+app:
+  environment: test
+  message: Inventory Service Testing Environment
+  security:
+    jwt:
+      secret: 9a4f2c8d3b7a1e5f6g9h0j2k4l6m8n0p1q3r5s7t9u8v6w4x2y0z1a3b5c7d9e1f
+      expiration: 3600000
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  sql:
+    init:
+      mode: never
+
+  kafka:
+    consumer:
+      group-id: test-group-inventory-${random.uuid}
+
+logging:
+  level:
+    org.esrakonya.backend: DEBUG

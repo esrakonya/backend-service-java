@@ -1,0 +1,24 @@
+app:
+  environment: local
+  message: Auth Service is running on Local Machine
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/marketplace_db
+    username: esra
+    password: esra1234
+  jpa:
+    show-sql: true
+
+  data:
+    redis:
+      host: localhost
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    io.lettuce: INFO
+    org.esrakonya.backend: DEBUG

@@ -1,0 +1,7 @@
+app:
+  environment: local
+  message: Notification Service is running on Local Machine
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092

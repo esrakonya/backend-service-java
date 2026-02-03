@@ -1,0 +1,14 @@
+app:
+  environment: prod
+  message: Inventory Service is running on Docker
+
+spring:
+  datasource:
+    url: jdbc:postgresql://marketplace-postgres:5432/marketplace_db
+    username: esra
+    password: esra1234
+  jpa:
+    show-sql: false
+
+  kafka:
+    bootstrap-servers: marketplace-kafka:29092

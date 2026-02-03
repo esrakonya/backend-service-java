@@ -1,0 +1,17 @@
+server:
+  port: 0
+
+app:
+  environment: test
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+
+logging:
+  level:
+    root: WARN
+    org.esrakonya.backend: DEBUG

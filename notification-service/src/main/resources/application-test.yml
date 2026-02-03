@@ -1,0 +1,15 @@
+server:
+  port: 0 # Dynamic port allocation for isolation
+
+app:
+  environment: test
+  message: Notification Service Testing Environment
+
+spring:
+  kafka:
+    consumer:
+      group-id: test-notification-${random.uuid}
+
+logging:
+  level:
+    org.esrakonya.backend: DEBUG

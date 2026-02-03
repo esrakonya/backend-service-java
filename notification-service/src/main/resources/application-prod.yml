@@ -1,0 +1,7 @@
+app:
+  environment: prod
+  message: Notification Service is running on Docker
+
+spring:
+  kafka:
+    bootstrap-servers: marketplace-kafka:29092

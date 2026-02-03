@@ -1,0 +1,14 @@
+app:
+  environment: local
+  message: Inventory Service is running on Local Machine
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/marketplace_db
+    username: esra
+    password: esra1234
+  jpa:
+    show-sql: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
