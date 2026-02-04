@@ -23,3 +23,9 @@ logging:
     io.lettuce: WARN
     org.springframework.security: INFO
     org.esrakonya.backend: INFO
+
+management:
+  zipkin:
+    tracing:
+      # Directs the trace data to the Zipkin container in the Docker network
+      endpoint: http://marketplace-zipkin:9411/api/v2/spans

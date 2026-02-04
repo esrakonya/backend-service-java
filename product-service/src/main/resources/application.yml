@@ -29,6 +29,7 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.add.type.headers: false
+        observation.enabled: true
 
 app:
   security:
@@ -43,3 +44,16 @@ logging:
     org.springframework.kafka: WARN
     com.zaxxer.hikari: WARN
     org.esrakonya.backend: INFO
+
+management:
+  observations:
+    key-values:
+      application: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: 1.0 # Capture every request for full visibility
+    propagation:
+      type: b3
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}

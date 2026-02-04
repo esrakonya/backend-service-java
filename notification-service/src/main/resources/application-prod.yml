@@ -5,3 +5,9 @@ app:
 spring:
   kafka:
     bootstrap-servers: marketplace-kafka:29092
+
+management:
+  zipkin:
+    tracing:
+      # Directs the trace data to the Zipkin container in the Docker network
+      endpoint: http://marketplace-zipkin:9411/api/v2/spans

@@ -43,3 +43,17 @@ logging:
     org.springframework.kafka: WARN
     com.zaxxer.hikari: WARN
     org.esrakonya.backend: INFO
+
+management:
+  observations:
+    key-values:
+      application: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: 1.0 # Capture 100% of requests for development
+    propagation:
+      type: b3
+  zipkin:
+    tracing:
+      # Use the variable with a localhost fallback for your Mac
+      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}

@@ -59,6 +59,14 @@ services:
     networks:
       - marketplace-net
 
+  marketplace-zipkin:
+    image: openzipkin/zipkin:3
+    container_name: marketplace-zipkin
+    ports:
+      - "9411:9411" # Zipkin Dashboard
+    networks:
+      - marketplace-net
+
   # --- MICROSERVICES LAYER ---
   auth-service:
     build: ./auth-service

@@ -19,6 +19,9 @@ spring:
     type: redis
 
   kafka:
+    # SENIOR FIX 1: Enable the bridge between Kafka and Spring Tracing
+    listener:
+      observation-enabled: true
     consumer:
       group-id: inventory-group
       auto-offset-reset: earliest
@@ -28,7 +31,8 @@ spring:
         spring.json:
           value.default.type: org.esrakonya.backend.common.event.ProductCreatedEvent
           trusted.packages: org.esrakonya.backend.common.event
-      # Resilience Configuration
+        # SENIOR FIX 2: Enable low-level client observation
+        observation.enabled: true
       retry:
         max-attempts: 3
         initial-interval: 2000
@@ -44,3 +48,16 @@ logging:
     org.apache.kafka: WARN
     org.springframework.kafka: WARN
     org.esrakonya.backend: INFO
+
+management:
+  observations:
+    key-values:
+      application: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: 1.0
+    propagation:
+      type: b3 # Ensures common header format across the fleet
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}
