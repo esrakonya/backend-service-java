@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!-- Define the log format: Timestamp [Thread] Level Logger - Message -->
-    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n" />
+    <springProperty scope="context" name="applicationName" source="spring.application.name"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
-    <!-- Console Appender -->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- 1. Console Appender (For your eyes during development) -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>${LOG_PATTERN}</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} [TraceID: %X{traceId:-}] - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- Senior Move: Define different levels for Infrastructure vs Domain -->
+    <!-- 2. JSON Appender (For the ELK Stack / Logstash) -->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!-- We will define this host in Docker later -->
+        <destination>${LOGSTASH_HOST:-localhost}:5044</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <includeContext>true</includeContext>
+            <includeCallerData>true</includeCallerData>
+            <!-- Senior Move: Every log will carry the Service Name automatically -->
+            <customFields>{"service":"${spring.application.name}"}</customFields>
+        </encoder>
+    </appender>
 
-    <!-- Silence noisy framework logs -->
-    <logger name="org.springframework" level="WARN" />
-    <logger name="org.hibernate" level="WARN" />
-    <logger name="org.apache.kafka" level="WARN" />
-
-    <!-- Keep our business logic visible -->
-    <logger name="org.esrakonya.backend" level="INFO" />
-
+    <!-- Use Console for local and Logstash for prod/cloud -->
     <root level="INFO">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="LOGSTASH" />
     </root>
 </configuration>

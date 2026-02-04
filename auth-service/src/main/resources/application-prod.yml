@@ -29,3 +29,6 @@ management:
     tracing:
       # Directs the trace data to the Zipkin container in the Docker network
       endpoint: http://marketplace-zipkin:9411/api/v2/spans
+
+# Inside application-prod.yml
+LOGSTASH_HOST: marketplace-logstash
