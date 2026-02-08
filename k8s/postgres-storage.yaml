@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc # Arşivin adı
+spec:
+  accessModes:
+    - ReadWriteOnce # Sadece bir bina (pod) aynı anda yazabilir
+  resources:
+    requests:
+      storage: 1Gi # 1 GB yer bize yeter de artar

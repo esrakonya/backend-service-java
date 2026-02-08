@@ -1,0 +1,49 @@
+{{- if .Values.infrastructure.postgres.name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.infrastructure.postgres.name }}
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.infrastructure.postgres.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: {{ .Values.infrastructure.postgres.image }}
+          env:
+            - name: POSTGRES_DB
+              value: {{ .Values.infrastructure.postgres.dbName }}
+            - name: POSTGRES_USER
+              value: {{ .Values.infrastructure.postgres.user }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.infrastructure.postgres.password }}
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.infrastructure.postgres.pvcName }}{{- end }}

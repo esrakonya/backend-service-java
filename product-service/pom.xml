@@ -106,4 +106,13 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <build>
+        <finalName>product-service</finalName> <!-- İsmi buraya sabitliyoruz -->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

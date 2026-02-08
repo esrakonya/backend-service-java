@@ -15,7 +15,7 @@ public class SecurityConfig {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/fallback/**").permitAll() // Ensure fallback is public
+                        .pathMatchers("/actuator/**","/fallback/**").permitAll() // Ensure fallback is public
                         .anyExchange().permitAll() // Let downstream services handle security
                 )
                 .build();

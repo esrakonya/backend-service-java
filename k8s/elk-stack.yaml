@@ -1,0 +1,103 @@
+# 1. ADIM: Logstash Ayarlarını Tanımla (ConfigMap)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-config
+data:
+  logstash.conf: |
+    input {
+      tcp {
+        port => 5044
+        codec => json
+      }
+    }
+    output {
+      elasticsearch {
+        hosts => ["http://marketplace-elasticsearch:9200"]
+        index => "marketplace-logs-%{+YYYY.MM.dd}"
+      }
+    }
+---
+# 2. ADIM: Logstash'e Ulaşım Kapısı (Service)
+apiVersion: v1
+kind: Service
+metadata:
+  name: marketplace-logstash
+spec:
+  selector:
+    app: logstash
+  ports:
+    - protocol: TCP
+      port: 5044
+      targetPort: 5044
+---
+# 3. ADIM: Logstash Çalıştırıcı (Deployment) - Senin sorduğun kısım burası
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: marketplace-logstash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+        - name: logstash
+          image: docker.elastic.co/logstash/logstash:8.11.1
+          env:
+            - name: LS_JAVA_OPTS
+              value: "-Xms256m -Xmx256m"
+          ports:
+            - containerPort: 5044
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/share/logstash/pipeline/logstash.conf
+              subPath: logstash.conf
+      volumes:
+        - name: config-volume
+          configMap:
+            name: logstash-config
+---
+# 4. ADIM: Elasticsearch (Logların saklandığı yer)
+apiVersion: v1
+kind: Service
+metadata:
+  name: marketplace-elasticsearch
+spec:
+  selector:
+    app: elasticsearch
+  ports:
+    - port: 9200
+      targetPort: 9200
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: marketplace-elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+        - name: elasticsearch
+          image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
+          env:
+            - name: discovery.type
+              value: "single-node"
+            - name: xpack.security.enabled
+              value: "false"
+            - name: "ES_JAVA_OPTS"
+              value: "-Xms512m -Xmx512m"
+          ports:
+            - containerPort: 9200

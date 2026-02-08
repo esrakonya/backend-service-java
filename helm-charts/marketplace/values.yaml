@@ -1,0 +1,45 @@
+# --- GLOBAL SETTINGS ---
+global:
+  imagePullPolicy: Never
+  namespace: default
+
+# --- MICROSERVICES CONFIG ---
+services:
+  auth:
+    name: auth-service
+    image: esrakonya/auth-service:v1
+    port: 8080
+  product:
+    name: product-service
+    image: esrakonya/product-service:v1
+    port: 8080
+  gateway:
+    name: gateway-service
+    image: esrakonya/gateway-service:v1
+    port: 8080
+
+# --- INFRASTRUCTURE CONFIG ---
+infrastructure:
+  postgres:
+    name: marketplace-postgres
+    image: postgres:16-alpine
+    dbName: marketplace_db
+    user: esra
+    password: esra1234
+    pvcName: postgres-pvc
+  redis:
+    name: marketplace-redis
+    image: redis:7-alpine
+  kafka:
+    name: marketplace-kafka
+    image: confluentinc/cp-kafka:7.4.0
+    zookeeper: marketplace-zookeeper
+
+# --- OBSERVABILITY CONFIG ---
+observability:
+  zipkin:
+    name: marketplace-zipkin
+    image: openzipkin/zipkin:3
+  elasticsearch:
+    name: marketplace-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1

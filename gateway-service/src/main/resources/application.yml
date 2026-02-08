@@ -9,6 +9,16 @@ spring:
 
   cloud:
     gateway:
+      routes:
+        - id: product-service
+          uri: ${PRODUCT_SERVICE_URL:http://product-service:8080}
+          predicates:
+            - Path=/api/v1/products/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: productServiceCircuitBreaker
+                fallbackUri: forward:/fallback/products
       httpclient:
         connect-timeout: 5000
         response-timeout: 5s
