@@ -9,7 +9,7 @@ spring:
 
 springdoc:
   api-docs:
-    path: /v3/api-docs
+    path: /api/v1/auth/v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
     # Senior Tip: Swagger arayüzünde servis isminin görünmesini sağlar

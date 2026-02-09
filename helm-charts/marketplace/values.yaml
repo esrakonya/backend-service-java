@@ -17,15 +17,16 @@ services:
     name: gateway-service
     image: esrakonya/gateway-service:latest
     port: 8080
-  inventory:
-    name: inventory-service
-    image: esrakonya/inventory-service:latest
-    port: 8080
     env:
       AUTH_SERVICE_URL: "http://auth-service:8080"
       PRODUCT_SERVICE_URL: "http://product-service:8080"
       INVENTORY_SERVICE_URL: "http://inventory-service:8080"
       LOGSTASH_HOST: "marketplace-logstash"
+      SPRINGDOC_API_DOCS_ENABLED: "true"
+  inventory:
+    name: inventory-service
+    image: esrakonya/inventory-service:latest
+    port: 8080
 
 # --- INFRASTRUCTURE CONFIG ---
 infrastructure:
