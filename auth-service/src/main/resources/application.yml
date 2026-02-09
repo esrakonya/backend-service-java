@@ -7,6 +7,14 @@ spring:
   profiles:
     active: local # Default profile
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    # Senior Tip: Swagger arayüzünde servis isminin görünmesini sağlar
+    operationsSorter: alpha
+
   datasource:
     driver-class-name: org.postgresql.Driver
 

@@ -7,6 +7,16 @@ spring:
   profiles:
     active: local
 
+springdoc:
+  swagger-ui:
+    urls:
+      - name: "1. Auth Service"
+        url: "/api/v1/auth/v3/api-docs"
+      - name: "2. Product Service"
+        url: "/api/v1/products/v3/api-docs"
+      - name: "3. Inventory Service"
+        url: "/api/v1/inventory/v3/api-docs"
+
   cloud:
     gateway:
       routes:

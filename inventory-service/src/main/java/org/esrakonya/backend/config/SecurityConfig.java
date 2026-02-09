@@ -1,4 +1,4 @@
-package org.esrakonya.backend.security.config;
+package org.esrakonya.backend.config;
 
 import lombok.RequiredArgsConstructor;
 import org.esrakonya.backend.common.security.filter.JwtAuthenticationFilter;
@@ -27,9 +27,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/actuator/**","/health", "/api/v1/auth/**", "/error").permitAll()
-                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/categories/**").permitAll()
-                        // 3. Swagger
+                        .requestMatchers("/actuator/**", "/health", "/error").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -37,5 +35,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+
     }
 }

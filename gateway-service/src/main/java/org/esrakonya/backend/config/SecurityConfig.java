@@ -15,6 +15,8 @@ public class SecurityConfig {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
+                        .pathMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .pathMatchers("/api/v1/*/v3/api-docs").permitAll()
                         .pathMatchers("/actuator/**","/fallback/**").permitAll() // Ensure fallback is public
                         .anyExchange().permitAll() // Let downstream services handle security
                 )
