@@ -1,6 +1,6 @@
 # --- GLOBAL SETTINGS ---
 global:
-  imagePullPolicy: Never
+  imagePullPolicy: IfNotPresent
   namespace: default
 
 # --- MICROSERVICES CONFIG ---
@@ -16,6 +16,10 @@ services:
   gateway:
     name: gateway-service
     image: esrakonya/gateway-service:v1
+    port: 8080
+  inventory:
+    name: inventory-service
+    image: esrakonya/inventory-service:v1
     port: 8080
 
 # --- INFRASTRUCTURE CONFIG ---
