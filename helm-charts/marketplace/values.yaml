@@ -1,26 +1,31 @@
 # --- GLOBAL SETTINGS ---
 global:
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
   namespace: default
 
 # --- MICROSERVICES CONFIG ---
 services:
   auth:
     name: auth-service
-    image: esrakonya/auth-service:v1
+    image: esrakonya/auth-service:latest
     port: 8080
   product:
     name: product-service
-    image: esrakonya/product-service:v1
+    image: esrakonya/product-service:latest
     port: 8080
   gateway:
     name: gateway-service
-    image: esrakonya/gateway-service:v1
+    image: esrakonya/gateway-service:latest
     port: 8080
   inventory:
     name: inventory-service
-    image: esrakonya/inventory-service:v1
+    image: esrakonya/inventory-service:latest
     port: 8080
+    env:
+      AUTH_SERVICE_URL: "http://auth-service:8080"
+      PRODUCT_SERVICE_URL: "http://product-service:8080"
+      INVENTORY_SERVICE_URL: "http://inventory-service:8080"
+      LOGSTASH_HOST: "marketplace-logstash"
 
 # --- INFRASTRUCTURE CONFIG ---
 infrastructure:

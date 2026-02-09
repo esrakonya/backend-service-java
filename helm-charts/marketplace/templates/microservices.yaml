@@ -30,5 +30,16 @@ spec:
         - name: {{ $service.name }}
           image: {{ $service.image }}
           imagePullPolicy: {{ $.Values.global.imagePullPolicy }}
+          env:
+            # Eğer servisin altında özel env tanımları varsa onları bas:
+            {{- range $envKey, $envVal := $service.env }}
+            - name: {{ $envKey }}
+              value: {{ $envVal | quote }}
+            {{- end }}
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://marketplace-postgres:5432/marketplace_db"
           ports:
-            - containerPort: 8080{{- end }}
+            - containerPort: 8080
+  {{- end }}
