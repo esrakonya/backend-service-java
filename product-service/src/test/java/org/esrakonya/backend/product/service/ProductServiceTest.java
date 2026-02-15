@@ -1,4 +1,4 @@
-package org.esrakonya.backend.service;
+package org.esrakonya.backend.product.service;
 
 import org.esrakonya.backend.common.core.exception.ResourceNotFoundException;
 import org.esrakonya.backend.product.domain.CategoryEntity;

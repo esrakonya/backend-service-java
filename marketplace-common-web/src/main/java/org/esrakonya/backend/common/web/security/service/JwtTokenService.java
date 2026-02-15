@@ -5,10 +5,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
-import org.esrakonya.backend.common.web.config.AppProperties;
+import org.esrakonya.backend.common.web.config.JwtProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
@@ -18,11 +17,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Service
+// @Service anotasyonunu SİLDİK! Artık sessiz bir kütüphaneyiz.
 @RequiredArgsConstructor
 public class JwtTokenService implements TokenService {
 
-    private final AppProperties appProperties;
+    // Sadece JWT ile ilgili ayarları biliyoruz (Least Privilege)
+    private final JwtProperties jwtProperties;
 
     @Override
     public String generateToken(UserDetails userDetails) {
@@ -52,16 +52,14 @@ public class JwtTokenService implements TokenService {
     }
 
     private Key getSignInKey() {
-        byte[] keyBytes = getSecret().getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        // Doğrudan JwtProperties üzerinden alıyoruz
+        byte[] keyBytes = jwtProperties.getSecret().getBytes(java.nio.charset.StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    private String getSecret() {
-        return appProperties.getSecurity().getJwt().getSecret();
-    }
-
     private long getExpiration() {
-        return appProperties.getSecurity().getJwt().getExpiration();
+        // Doğrudan JwtProperties üzerinden alıyoruz
+        return jwtProperties.getExpiration();
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> resolver) {

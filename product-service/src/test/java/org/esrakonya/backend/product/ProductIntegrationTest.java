@@ -1,8 +1,8 @@
 package org.esrakonya.backend.product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.esrakonya.backend.BaseIntegrationTest;
 import org.esrakonya.backend.common.web.security.service.TokenService;
+import org.esrakonya.backend.product.base.FullInfrastructureTest;
 import org.esrakonya.backend.product.domain.CategoryEntity;
 import org.esrakonya.backend.product.domain.ProductEntity;
 import org.esrakonya.backend.product.dto.CategoryRequest;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ActiveProfiles("test")
-class ProductIntegrationTest extends BaseIntegrationTest {
+class ProductIntegrationTest extends FullInfrastructureTest {
 
     @Autowired private MockMvc mockMvc;
     @Autowired private ObjectMapper objectMapper;
