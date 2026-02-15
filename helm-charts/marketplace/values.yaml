@@ -27,6 +27,13 @@ services:
     name: inventory-service
     image: esrakonya/inventory-service:latest
     port: 8080
+  notification:
+    name: notification-service
+    image: esrakonya/notification-service:latest
+    port: 8080
+    env:
+      LOGSTASH_HOST: "marketplace-logstash"
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: "marketplace-kafka:29092"
 
 # --- INFRASTRUCTURE CONFIG ---
 infrastructure:
