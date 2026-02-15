@@ -1,7 +1,7 @@
 package org.esrakonya.backend.product.service;
 
-import org.esrakonya.backend.product.dto.ProductRequest;
-import org.esrakonya.backend.product.dto.ProductResponse;
+import org.esrakonya.backend.common.core.dto.product.ProductRequest;
+import org.esrakonya.backend.common.core.dto.product.ProductResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

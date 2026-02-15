@@ -15,7 +15,7 @@ services:
     port: 8080
   gateway:
     name: gateway-service
-    image: esrakonya/gateway-service:latest
+    image: esrakonya/gateway-service:v3
     port: 8080
     env:
       AUTH_SERVICE_URL: "http://auth-service:8080"

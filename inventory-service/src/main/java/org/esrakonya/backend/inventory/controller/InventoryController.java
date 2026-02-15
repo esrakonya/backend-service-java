@@ -3,7 +3,7 @@ package org.esrakonya.backend.inventory.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.esrakonya.backend.common.dto.MessageResponse;
+import org.esrakonya.backend.common.core.dto.MessageResponse;
 import org.esrakonya.backend.inventory.service.InventoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

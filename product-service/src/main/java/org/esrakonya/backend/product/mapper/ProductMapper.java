@@ -1,11 +1,8 @@
 package org.esrakonya.backend.product.mapper;
 
-import org.esrakonya.backend.product.domain.CategoryEntity;
 import org.esrakonya.backend.product.domain.ProductEntity;
-import org.esrakonya.backend.product.dto.CategoryRequest;
-import org.esrakonya.backend.product.dto.CategoryResponse;
-import org.esrakonya.backend.product.dto.ProductRequest;
-import org.esrakonya.backend.product.dto.ProductResponse;
+import org.esrakonya.backend.common.core.dto.product.ProductRequest;
+import org.esrakonya.backend.common.core.dto.product.ProductResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

@@ -3,12 +3,12 @@ package org.esrakonya.backend.product.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.esrakonya.backend.common.exception.ResourceNotFoundException;
+import org.esrakonya.backend.common.core.event.ProductCreatedEvent;
+import org.esrakonya.backend.common.core.exception.ResourceNotFoundException;
 import org.esrakonya.backend.product.domain.CategoryEntity;
 import org.esrakonya.backend.product.domain.ProductEntity;
-import org.esrakonya.backend.product.dto.ProductRequest;
-import org.esrakonya.backend.product.dto.ProductResponse;
-import org.esrakonya.backend.common.event.ProductCreatedEvent;
+import org.esrakonya.backend.common.core.dto.product.ProductRequest;
+import org.esrakonya.backend.common.core.dto.product.ProductResponse;
 import org.esrakonya.backend.product.mapper.ProductMapper;
 import org.esrakonya.backend.product.repository.CategoryRepository;
 import org.esrakonya.backend.product.repository.ProductRepository;

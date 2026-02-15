@@ -2,8 +2,8 @@ package org.esrakonya.backend.inventory.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.esrakonya.backend.common.exception.InsufficientStockException;
-import org.esrakonya.backend.common.exception.ResourceNotFoundException;
+import org.esrakonya.backend.common.core.exception.InsufficientStockException;
+import org.esrakonya.backend.common.core.exception.ResourceNotFoundException;
 import org.esrakonya.backend.inventory.domain.InventoryEntity;
 import org.esrakonya.backend.inventory.repository.InventoryRepository;
 import org.esrakonya.backend.inventory.service.InventoryService;

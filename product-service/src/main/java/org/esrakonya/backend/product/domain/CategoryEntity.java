@@ -2,11 +2,10 @@ package org.esrakonya.backend.product.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.esrakonya.backend.common.domain.BaseEntity;
+import org.esrakonya.backend.common.persistence.model.BaseEntity;
 
 import java.util.List;
 

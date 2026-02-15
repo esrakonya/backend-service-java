@@ -1,7 +1,7 @@
 package org.esrakonya.backend.notification;
 
 import lombok.extern.slf4j.Slf4j;
-import org.esrakonya.backend.common.event.ProductCreatedEvent;
+import org.esrakonya.backend.common.core.event.ProductCreatedEvent;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 

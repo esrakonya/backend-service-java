@@ -2,13 +2,10 @@ package org.esrakonya.backend.inventory.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.esrakonya.backend.common.domain.BaseEntity;
-
-import java.time.LocalDateTime;
+import org.esrakonya.backend.common.persistence.model.BaseEntity;
 
 @Entity
 @Table(name = "inventory")

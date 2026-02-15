@@ -11,7 +11,7 @@ jobs:
     # Mikroservis listemiz (Döngüye sokacağız)
     strategy:
       matrix:
-        service: [auth-service, product-service, gateway-service, inventory-service]
+        service: [auth-service, product-service, gateway-service, inventory-service, notification-service]
 
     steps:
       - name: Checkout Code

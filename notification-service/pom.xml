@@ -3,32 +3,44 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>org.esrakonya</groupId>
+        <groupId>org.esrakonya.backend</groupId>
         <artifactId>backend-service-java</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>notification-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version> <!-- İŞTE BUNU EKLEDİK: Senior Garantisi -->
 
     <dependencies>
-        <!-- 1. Shared Kernel -->
         <dependency>
-            <groupId>org.esrakonya</groupId>
-            <artifactId>marketplace-common</artifactId>
+            <groupId>org.esrakonya.backend</groupId>
+            <artifactId>marketplace-common-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version> <!-- Burayı da açıkça yazalım -->
         </dependency>
 
-        <!-- 2. Spring Boot Web (Endpointler ve Actuator için) -->
+        <dependency>
+            <groupId>org.esrakonya.backend</groupId>
+            <artifactId>marketplace-common-web</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 3. Kafka (Mesajları dinlemek için) -->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

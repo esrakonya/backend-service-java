@@ -1,9 +1,9 @@
 package org.esrakonya.backend.auth.mapper;
 
-import org.esrakonya.backend.common.dto.AuthResponse;
-import org.esrakonya.backend.common.dto.RegisterRequest;
-import org.esrakonya.backend.user.domain.Role;
-import org.esrakonya.backend.user.domain.UserEntity;
+import org.esrakonya.backend.common.core.dto.auth.AuthResponse;
+import org.esrakonya.backend.common.core.dto.auth.RegisterRequest;
+import org.esrakonya.backend.common.core.enums.Role;
+import org.esrakonya.backend.auth.domain.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

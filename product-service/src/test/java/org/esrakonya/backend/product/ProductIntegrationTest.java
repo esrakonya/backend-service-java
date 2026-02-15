@@ -2,13 +2,11 @@ package org.esrakonya.backend.product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.esrakonya.backend.BaseIntegrationTest;
-import org.esrakonya.backend.common.dto.AuthResponse;
-import org.esrakonya.backend.common.dto.RegisterRequest;
-import org.esrakonya.backend.common.security.service.TokenService;
+import org.esrakonya.backend.common.web.security.service.TokenService;
 import org.esrakonya.backend.product.domain.CategoryEntity;
 import org.esrakonya.backend.product.domain.ProductEntity;
 import org.esrakonya.backend.product.dto.CategoryRequest;
-import org.esrakonya.backend.product.dto.ProductRequest;
+import org.esrakonya.backend.common.core.dto.product.ProductRequest;
 import org.esrakonya.backend.product.repository.CategoryRepository;
 import org.esrakonya.backend.product.repository.ProductRepository;
 import org.junit.jupiter.api.*;
@@ -16,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.math.BigDecimal;
 import java.util.UUID;

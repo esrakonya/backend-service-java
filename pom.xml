@@ -4,13 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.esrakonya</groupId>
+    <groupId>org.esrakonya.backend</groupId>
     <artifactId>backend-service-java</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>marketplace-common</module>
+        <module>marketplace-common-core</module>
+        <module>marketplace-common-web</module>
+        <module>marketplace-common-persistence</module>
         <module>auth-service</module>
         <module>product-service</module>
         <module>inventory-service</module>
@@ -42,8 +44,8 @@
         <dependencies>
             <!-- İç bağımlılık: Servislerin common'ı görebilmesi için -->
             <dependency>
-                <groupId>org.esrakonya</groupId>
-                <artifactId>marketplace-common</artifactId>
+                <groupId>org.esrakonya.backend</groupId>
+                <artifactId>marketplace-common-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -134,21 +136,6 @@
                             <version>${mapstruct.version}</version>
                         </path>
                     </annotationProcessorPaths>
-                </configuration>
-            </plugin>
-
-            <!-- 2. Spring Boot Plugin (Added Here) -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <!-- Senior Tip: Ensure Lombok doesn't end up in the final JAR -->
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
                 </configuration>
             </plugin>
         </plugins>
