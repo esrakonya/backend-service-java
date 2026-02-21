@@ -2,20 +2,21 @@
 global:
   imagePullPolicy: Always
   namespace: default
+  imageTag: "v4"
 
 # --- MICROSERVICES CONFIG ---
 services:
   auth:
     name: auth-service
-    image: esrakonya/auth-service:latest
+    image: esrakonya/auth-service
     port: 8080
   product:
     name: product-service
-    image: esrakonya/product-service:latest
+    image: esrakonya/product-service
     port: 8080
   gateway:
     name: gateway-service
-    image: esrakonya/gateway-service:v3
+    image: esrakonya/gateway-service
     port: 8080
     env:
       AUTH_SERVICE_URL: "http://auth-service:8080"
@@ -25,11 +26,11 @@ services:
       SPRINGDOC_API_DOCS_ENABLED: "true"
   inventory:
     name: inventory-service
-    image: esrakonya/inventory-service:latest
+    image: esrakonya/inventory-service
     port: 8080
   notification:
     name: notification-service
-    image: esrakonya/notification-service:latest
+    image: esrakonya/notification-service
     port: 8080
     env:
       LOGSTASH_HOST: "marketplace-logstash"

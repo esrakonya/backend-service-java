@@ -25,13 +25,14 @@ spec:
     metadata:
       labels:
         app: {{ $service.name }}
-    spec:
+    spec: # <--- 1. Buradaki 'spec' Pod'un özelliklerini belirtir
       containers:
         - name: {{ $service.name }}
-          image: {{ $service.image }}
+          # --- İŞTE DEĞİŞECEK OLAN SATIR BURASI! ---
+          image: {{ printf "%s:%s" $service.image ($.Values.global.imageTag | default "latest") }}
+          # -----------------------------------------
           imagePullPolicy: {{ $.Values.global.imagePullPolicy }}
           env:
-            # Eğer servisin altında özel env tanımları varsa onları bas:
             {{- range $envKey, $envVal := $service.env }}
             - name: {{ $envKey }}
               value: {{ $envVal | quote }}
