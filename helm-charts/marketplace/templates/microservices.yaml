@@ -33,14 +33,16 @@ spec:
           # -----------------------------------------
           imagePullPolicy: {{ $.Values.global.imagePullPolicy }}
           env:
-            {{- range $envKey, $envVal := $service.env }}
-            - name: {{ $envKey }}
-              value: {{ $envVal | quote }}
-            {{- end }}
-            - name: SPRING_PROFILES_ACTIVE
-              value: "prod"
-            - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://marketplace-postgres:5432/marketplace_db"
+            { { - if $service.env } }
+              { { - range $envKey, $envVal := $service.env } }
+              - name: { { $envKey } }
+                value: { { $envVal | quote } }
+              { { - end } }
+              { { - end } }
+              - name: SPRING_PROFILES_ACTIVE
+                value: "prod"
+              - name: SPRING_DATASOURCE_URL
+                value: "jdbc:postgresql://marketplace-postgres:5432/marketplace_db"
           ports:
             - containerPort: 8080
   {{- end }}

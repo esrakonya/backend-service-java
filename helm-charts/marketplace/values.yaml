@@ -1,8 +1,8 @@
 # --- GLOBAL SETTINGS ---
 global:
-  imagePullPolicy: Always
+  imagePullPolicy: IfNotPresent
   namespace: default
-  imageTag: "v4"
+  imageTag: ""
 
 # --- MICROSERVICES CONFIG ---
 services:
