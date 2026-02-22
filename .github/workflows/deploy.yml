@@ -17,6 +17,6 @@ jobs:
 
       - name: Deploy with Helm
         run: |
-          helm upgrade marketplace ./marketplace \
+          helm upgrade marketplace ./helm-charts/marketplace \
             --install \
             --set global.imageTag=${{ github.event.inputs.imageTag }}
