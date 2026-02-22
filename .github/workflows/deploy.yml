@@ -1,0 +1,22 @@
+name: Deploy to Local K8s
+
+on:
+  workflow_dispatch:
+    inputs:
+      imageTag:
+        description: 'Docker image tag (commit SHA)'
+        required: true
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, local-deploy]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy with Helm
+        run: |
+          helm upgrade marketplace ./marketplace \
+            --install \
+            --set global.imageTag=${{ github.event.inputs.imageTag }}
