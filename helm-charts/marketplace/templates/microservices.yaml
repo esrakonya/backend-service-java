@@ -25,20 +25,19 @@ spec:
     metadata:
       labels:
         app: {{ $service.name }}
-    spec: # <--- 1. Buradaki 'spec' Pod'un özelliklerini belirtir
+    spec:
       containers:
         - name: {{ $service.name }}
-          # --- İŞTE DEĞİŞECEK OLAN SATIR BURASI! ---
           image: {{ printf "%s:%s" $service.image ($.Values.global.imageTag | default "latest") }}
-          # -----------------------------------------
           imagePullPolicy: {{ $.Values.global.imagePullPolicy }}
           env:
-            { { - if $service.env } }
-              { { - range $envKey, $envVal := $service.env } }
-              - name: { { $envKey } }
-                value: { { $envVal | quote } }
-              { { - end } }
-              { { - end } }
+            # Sadece eğer 'env' tanımlıysa döngüye gir ✅
+              {{- if $service.env }}
+              {{- range $envKey, $envVal := $service.env }}
+              - name: {{ $envKey }}
+                value: {{ $envVal | quote }}
+              {{- end }}
+              {{- end }}
               - name: SPRING_PROFILES_ACTIVE
                 value: "prod"
               - name: SPRING_DATASOURCE_URL
