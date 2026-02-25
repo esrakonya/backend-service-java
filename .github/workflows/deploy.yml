@@ -13,7 +13,24 @@ jobs:
     runs-on: [self-hosted, local-deploy]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Clean workspace (important for self-hosted runners)
+        run: |
+          git reset --hard
+          git clean -fdx
+
+      - name: Show commit being deployed
+        run: git rev-parse HEAD
+
+      - name: Check Helm version
+        run: helm version
+
+      - name: Validate Helm template rendering
+        run: helm template marketplace ./helm-charts/marketplace
 
       - name: Deploy with Helm
         run: |
