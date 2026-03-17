@@ -9,31 +9,17 @@ on:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/main'
     runs-on: [self-hosted, local-deploy]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Clean workspace (important for self-hosted runners)
-        run: |
-          git reset --hard
-          git clean -fdx
-
-      - name: Show commit being deployed
-        run: git rev-parse HEAD
-
-      - name: Check Helm version
-        run: helm version
-
-      - name: Validate Helm template rendering
-        run: helm template marketplace ./helm-charts/marketplace
+      - name: Validate Helm Chart
+        run: helm template marketplace ./helm-charts
 
       - name: Deploy with Helm
         run: |
-          helm upgrade marketplace ./helm-charts/marketplace \
+          helm upgrade marketplace ./helm-charts \
             --install \
             --set global.imageTag=${{ github.event.inputs.imageTag }}
