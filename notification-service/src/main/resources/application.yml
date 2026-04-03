@@ -8,8 +8,9 @@ spring:
     active: local
 
   kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     listener:
-      observation-enabled: true # The magic switch for @KafkaListener tracing
+      observation-enabled: true
     consumer:
       group-id: notification-group
       auto-offset-reset: earliest
@@ -22,11 +23,12 @@ spring:
         observation.enabled: true
       retry:
         max-attempts: 3
+        initial-interval: 2000
 
 app:
   security:
     jwt:
-      secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+      secret: ${APPLICATION_SECURITY_JWT_SECRET_KEY:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
       expiration: 86400000
 
 logging:
@@ -46,4 +48,4 @@ management:
       type: b3
   zipkin:
     tracing:
-      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}
+      endpoint: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}

@@ -1,5 +1,5 @@
 server:
-  port: 0 # Dynamic port allocation for isolation
+  port: 0
 
 app:
   environment: test

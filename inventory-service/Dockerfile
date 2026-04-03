@@ -1,5 +1,9 @@
 # Use a lightweight JRE image for the runtime
 FROM amazoncorretto:17-alpine
+
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+
 WORKDIR /app
 
 # Senior Tip: We expect the JAR to be already built by Maven
@@ -10,4 +14,8 @@ COPY target/*.jar app.jar
 EXPOSE 8080
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", \
+            "-XX:+UseContainerSupport", \
+            "-XX:MaxRAMPercentage=75.0", \
+            "-Djava.security.egd=file:/dev/./urandom", \
+            "-jar", "app.jar"]

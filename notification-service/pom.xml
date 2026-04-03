@@ -12,13 +12,13 @@
     </parent>
 
     <artifactId>notification-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version> <!-- İŞTE BUNU EKLEDİK: Senior Garantisi -->
 
     <dependencies>
+        <!-- Internal Modules -->
         <dependency>
             <groupId>org.esrakonya.backend</groupId>
             <artifactId>marketplace-common-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version> <!-- Burayı da açıkça yazalım -->
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -32,17 +32,20 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- Messaging: Pure Kafka Consumer Logic -->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
+        <!-- Productivity Tools -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
+        <!-- PostgreSQL -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>

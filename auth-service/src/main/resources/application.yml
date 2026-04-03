@@ -5,14 +5,17 @@ spring:
   application:
     name: auth-service
   profiles:
-    active: local # Default profile
+    active: local
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
 
 springdoc:
   api-docs:
     path: /api/v1/auth/v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
-    # Senior Tip: Swagger arayüzünde servis isminin görünmesini sağlar
     operationsSorter: alpha
 
   datasource:
@@ -41,7 +44,7 @@ springdoc:
 app:
   security:
     jwt:
-      secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+      secret: ${APPLICATION_SECURITY_JWT_SECRET_KEY:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
       expiration: 86400000
       issuer: esrakonya-auth-service
 
@@ -64,4 +67,4 @@ management:
   zipkin:
     tracing:
       # Use the variable with a localhost fallback for your Mac
-      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}
+      endpoint: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}

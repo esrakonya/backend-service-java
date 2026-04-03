@@ -4,20 +4,17 @@ app:
 
 spring:
   datasource:
-    url: jdbc:postgresql://marketplace-postgres:5432/marketplace_db
-    username: esra
-    password: esra1234
   jpa:
     show-sql: false
 
-  kafka:
-    bootstrap-servers: marketplace-kafka:29092
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:marketplace-redis}
 
-management:
-  zipkin:
-    tracing:
-      # Directs the trace data to the Zipkin container in the Docker network
-      endpoint: http://marketplace-zipkin:9411/api/v2/spans
+logging:
+  level:
+    org.hibernate.SQL: WARN
+    org.esrakonya.backend: INFO
 
-# Inside application-prod.yml
-LOGSTASH_HOST: marketplace-logstash
+logstash:
+  host: ${LOGSTASH_HOST:marketplace-logstash}

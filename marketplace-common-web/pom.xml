@@ -3,47 +3,41 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.esrakonya.backend</groupId>
         <artifactId>backend-service-java</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.esrakonya.backend</groupId>
     <artifactId>marketplace-common-web</artifactId>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <packaging>jar</packaging>
 
     <dependencies>
-        <!-- 1. Bizim Saf Core Modülümüz -->
         <dependency>
             <groupId>org.esrakonya.backend</groupId>
             <artifactId>marketplace-common-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <!-- 2. Bizim Persistence Modülümüz (DataIntegrityViolationException için şart!) -->
         <dependency>
             <groupId>org.esrakonya.backend</groupId>
             <artifactId>marketplace-common-persistence</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <!-- 3. Web ve Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- 4. Security Utilities (JWT) - İşte eksik olanlar burasıydı! -->
+        <!-- JSON Web Token (JJWT) for Stateless Authentication -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -62,18 +56,19 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-
+        <!-- API Documentation (Swagger/OpenAPI for Distributed Services) -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.5.0</version>
         </dependency>
-    </dependencies>
 
+        <!-- Productivity Tools -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
 </project>

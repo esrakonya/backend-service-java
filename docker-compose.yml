@@ -1,5 +1,16 @@
 version: '3.8'
 
+x-common-env: &common-env
+  SPRING_PROFILES_ACTIVE: prod
+  SPRING_DATASOURCE_URL: jdbc:postgresql://marketplace-postgres:5432/marketplace_db
+  SPRING_DATASOURCE_USERNAME: esra
+  SPRING_DATASOURCE_PASSWORD: esra1234
+  APPLICATION_SECURITY_JWT_SECRET_KEY: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  LOGSTASH_HOST: marketplace-logstash
+  ZIPKIN_URL: http://marketplace-zipkin:9411/api/v2/spans
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: marketplace-kafka:29092
+  SPRING_DATA_REDIS_HOST: marketplace-redis
+
 services:
   # --- INFRASTRUCTURE LAYER ---
   marketplace-postgres:
@@ -63,7 +74,7 @@ services:
     image: openzipkin/zipkin:3
     container_name: marketplace-zipkin
     ports:
-      - "9411:9411" # Zipkin Dashboard
+      - "9411:9411"
     networks:
       - marketplace-net
 
@@ -72,7 +83,7 @@ services:
     container_name: marketplace-elasticsearch
     environment:
       - discovery.type=single-node
-      - xpack.security.enabled=false # Only for dev/portfolio purposes
+      - xpack.security.enabled=false
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
       - "9200:9200"
@@ -101,7 +112,6 @@ services:
       - "5601:5601"
     environment:
       - ELASTICSEARCH_HOSTS=http://marketplace-elasticsearch:9200
-      # Senior Move: Disable security on the Kibana side to match Elasticsearch
       - XPACK_SECURITY_ENABLED=false
     depends_on:
       - marketplace-elasticsearch
@@ -116,9 +126,7 @@ services:
     ports:
       - "8081:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://marketplace-postgres:5432/marketplace_db
-      - LOGSTASH_HOST=marketplace-logstash
+      <<: *common-env
     depends_on:
       marketplace-postgres:
         condition: service_healthy
@@ -131,11 +139,7 @@ services:
     ports:
       - "8082:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://marketplace-postgres:5432/marketplace_db
-      - SPRING_KAFKA_BOOTSTRAP_SERVERS=marketplace-kafka:29092
-      - SPRING_DATA_REDIS_HOST=marketplace-redis
-      - LOGSTASH_HOST=marketplace-logstash
+      <<: *common-env
     depends_on:
       marketplace-postgres:
         condition: service_healthy
@@ -152,10 +156,7 @@ services:
     ports:
       - "8083:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://marketplace-postgres:5432/marketplace_db
-      - SPRING_KAFKA_BOOTSTRAP_SERVERS=marketplace-kafka:29092
-      - LOGSTASH_HOST=marketplace-logstash
+      <<: *common-env
     depends_on:
       marketplace-postgres:
         condition: service_healthy
@@ -170,9 +171,7 @@ services:
     ports:
       - "8084:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_KAFKA_BOOTSTRAP_SERVERS=marketplace-kafka:29092
-      - LOGSTASH_HOST=marketplace-logstash
+      <<: *common-env
     depends_on:
       marketplace-kafka:
         condition: service_started
@@ -185,8 +184,10 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      - LOGSTASH_HOST=marketplace-logstash
+      <<: *common-env
+      AUTH_SERVICE_URL: http://auth-service:8080
+      PRODUCT_SERVICE_URL: http://product-service:8080
+      INVENTORY_SERVICE_URL: http://inventory-service:8080
     depends_on:
       - auth-service
       - product-service

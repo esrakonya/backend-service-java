@@ -35,12 +35,40 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: "prod"
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: marketplace-common-config
+                  key: KAFKA_BROKERS
+            - name: LOGSTASH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: marketplace-common-config
+                  key: LOGSTASH_HOST
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://marketplace-postgres:5432/marketplace_db"
+              valueFrom:
+                configMapKeyRef:
+                  name: marketplace-common-config
+                  key: POSTGRES_URL
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: marketplace-secrets
+                  key: postgres-user
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: marketplace-secrets
+                  key: postgres-password
+            - name: APPLICATION_SECURITY_JWT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: marketplace-secrets
+                  key: jwt-secret
+            {{- if $service.env }}
             {{- range $service.env }}
             - name: {{ .name }}
               value: {{ .value | quote }}
+            {{- end }}
             {{- end }}
   {{- end }}

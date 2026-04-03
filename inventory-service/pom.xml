@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.esrakonya.backend</groupId>
         <artifactId>backend-service-java</artifactId>
@@ -11,57 +12,51 @@
     </parent>
 
     <artifactId>inventory-service</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
-        <!-- 1. Saf Mantık Katmanı (DTO'lar, Event'ler) -->
+        <!-- Internal Shared Modules: Logic, Persistence, and Web Security -->
         <dependency>
             <groupId>org.esrakonya.backend</groupId>
             <artifactId>marketplace-common-core</artifactId>
             <version>${project.version}</version>
         </dependency>
-
-        <!-- 2. Veri Katmanı (BaseEntity BURADA!) -->
         <dependency>
             <groupId>org.esrakonya.backend</groupId>
             <artifactId>marketplace-common-persistence</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.esrakonya.backend</groupId>
             <artifactId>marketplace-common-web</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <!-- 3. Web & Security Katmanı (Filter'lar ve Exception Handler BURADA!) -->
-        <dependency>
-            <groupId>org.esrakonya.backend</groupId>
-            <artifactId>marketplace-common-web</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <!-- 4. Veritabanı ve Mesajlaşma -->
+        <!-- Database & Messaging: PostgreSQL for ACID and Kafka for Eventual Consistency -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
-        <!-- 5. MapStruct ve Lombok -->
+        <!-- 5. Mapping & Productivity -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- 6. Swagger / OpenAPI -->
+        <!-- Note: Swagger UI is already inherited via common-web, but kept here for explicit control -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>

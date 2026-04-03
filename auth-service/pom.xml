@@ -12,9 +12,10 @@
     </parent>
 
     <artifactId>auth-service</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
-        <!-- 1. Bizim Hazırladığımız Standart Katmanlar -->
+        <!-- Custom Shared Modules: The backbone of our architecture -->
         <dependency>
             <groupId>org.esrakonya.backend</groupId>
             <artifactId>marketplace-common-core</artifactId>
@@ -31,32 +32,37 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- 2. Servise Özel Altyapı Bağımlılıkları -->
+        <!-- Database & Caching Infrastructure -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+
+        <!-- Object-to-Object Mapping (DTO conversation) -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
         </dependency>
+
+        <!-- Boilerplate Reduction -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- Not: Web, Security ve Swagger artık 'common-web' üzerinden geliyor! -->
-        <!-- JJWT de artık 'common-web' üzerinden geliyor, burada tekrar yazmaya gerek yok! -->
+        <!-- Note: Web, Security, Swagger, and JJWT are inherited from 'common-web' -->
     </dependencies>
 
     <build>
         <plugins>
+            <!-- Builds an executable JAR for the Auth Service -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

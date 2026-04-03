@@ -7,14 +7,10 @@ spring:
   profiles:
     active: local
 
-springdoc:
-  api-docs:
-    path: /api/v1/inventory/v3/api-docs
-  swagger-ui:
-    path: /swagger-ui.html
-    operationsSorter: alpha
-
   datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/marketplace_db}
+    username: ${SPRING_DATASOURCE_USERNAME:esra}
+    password: ${SPRING_DATASOURCE_PASSWORD:esra1234}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -26,7 +22,7 @@ springdoc:
     type: redis
 
   kafka:
-    # SENIOR FIX 1: Enable the bridge between Kafka and Spring Tracing
+    boostrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     listener:
       observation-enabled: true
     consumer:
@@ -38,7 +34,6 @@ springdoc:
         spring.json:
           value.default.type: org.esrakonya.backend.common.event.ProductCreatedEvent
           trusted.packages: org.esrakonya.backend.common.event
-        # SENIOR FIX 2: Enable low-level client observation
         observation.enabled: true
       retry:
         max-attempts: 3
@@ -47,7 +42,7 @@ springdoc:
 app:
   security:
     jwt:
-      secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+      secret: ${APPLICATION_SECURITY_JWT_SECRET_KEY:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
       expiration: 86400000
 
 logging:
@@ -64,7 +59,7 @@ management:
     sampling:
       probability: 1.0
     propagation:
-      type: b3 # Ensures common header format across the fleet
+      type: b3
   zipkin:
     tracing:
-      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}
+      endpoint: ${ZIPKIN_URL:http://localhost:9411/api/v2/spans}

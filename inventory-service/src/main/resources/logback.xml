@@ -13,7 +13,7 @@
     <!-- 2. JSON Appender (For the ELK Stack / Logstash) -->
     <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <!-- We will define this host in Docker later -->
-        <destination>${LOGSTASH_HOST:-localhost}:5044</destination>
+        <destination>${LOGSTASH_HOST:-marketplace-logstash}:5044</destination>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <includeContext>true</includeContext>
             <includeCallerData>true</includeCallerData>

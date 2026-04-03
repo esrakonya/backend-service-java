@@ -1,16 +1,16 @@
 app:
   environment: prod
-  message: Notification Service is running on Docker
+  message: Notification Service is running on Kubernetes Infrastructure
 
-spring:
-  kafka:
-    bootstrap-servers: marketplace-kafka:29092
+logging:
+  level:
+    org.springframework.kafka: WARN
+    org.esrakonya.backend: INFO
+
+logstash:
+  host: ${LOGSTASH_HOST:marketplace-logstash}
 
 management:
   zipkin:
     tracing:
-      # Directs the trace data to the Zipkin container in the Docker network
-      endpoint: http://marketplace-zipkin:9411/api/v2/spans
-
-# Inside application-prod.yml
-LOGSTASH_HOST: marketplace-logstash
+      endpoint: ${ZIPKIN_URL}

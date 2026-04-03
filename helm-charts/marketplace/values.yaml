@@ -3,6 +3,15 @@ global:
   imagePullPolicy: IfNotPresent
   namespace: default
   imageTag: ""
+  config:
+    kafkaBrokers: "marketplace-kafka:29092"
+    logstashHost: "marketplace-logstash"
+    zipkinUrl: "http://marketplace-zipkin:9411"
+    postgresUrl: "jdbc:postgresql://marketplace-postgres:5432/marketplace_db"
+  secrets:
+    postgresUser: "esra"
+    postgresPassword: ""
+    jwtSecret: ""
 
 # --- MICROSERVICES CONFIG ---
 services:
@@ -50,7 +59,7 @@ infrastructure:
     image: postgres:16-alpine
     dbName: marketplace_db
     user: esra
-    password: esra1234
+    password: ""
     pvcName: postgres-pvc
   redis:
     name: marketplace-redis
