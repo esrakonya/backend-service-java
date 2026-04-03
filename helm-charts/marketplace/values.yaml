@@ -34,8 +34,6 @@ services:
         value: "http://product-service:8080"
       - name: INVENTORY_SERVICE_URL
         value: "http://inventory-service:8080"
-      - name: LOGSTASH_HOST
-        value: "marketplace-logstash"
       - name: SPRINGDOC_API_DOCS_ENABLED
         value: "true"
   inventory:
@@ -46,11 +44,6 @@ services:
     name: notification-service
     image: esrakonya/notification-service
     port: 8080
-    env:
-      - name: LOGSTASH_HOST
-        value: "marketplace-logstash"
-      - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
-        value: "marketplace-kafka:29092"
 
 # --- INFRASTRUCTURE CONFIG ---
 infrastructure:
