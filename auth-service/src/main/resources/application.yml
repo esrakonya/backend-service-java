@@ -10,15 +10,6 @@ spring:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
-
-springdoc:
-  api-docs:
-    path: ${SPRINGDOC_API_DOCS_PATH:/api/v1/auth/v3/api-docs}
-  swagger-ui:
-    path: /swagger-ui.html
-    operationsSorter: alpha
-
-  datasource:
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -40,6 +31,13 @@ springdoc:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.add.type.headers: false
+
+springdoc:
+  api-docs:
+    path: ${SPRINGDOC_API_DOCS_PATH:/api/v1/auth/v3/api-docs}
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: alpha
 
 app:
   security:
