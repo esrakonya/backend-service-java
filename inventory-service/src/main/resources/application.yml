@@ -22,7 +22,7 @@ spring:
     type: redis
 
   kafka:
-    boostrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     listener:
       observation-enabled: true
     consumer:
@@ -38,6 +38,12 @@ spring:
       retry:
         max-attempts: 3
         initial-interval: 2000
+
+springdoc:
+  api-docs:
+    path: ${SPRINGDOC_API_DOCS_PATH:/api/v1/inventory/v3/api-docs}
+  swagger-ui:
+    path: /swagger-ui.html
 
 app:
   security:

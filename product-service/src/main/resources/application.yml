@@ -35,6 +35,12 @@ spring:
         spring.json.add.type.headers: false
         observation.enabled: true
 
+springdoc:
+  api-docs:
+    path: ${SPRINGDOC_API_DOCS_PATH:/api/v1/products/v3/api-docs}
+  swagger-ui:
+    path: /swagger-ui.html
+
 app:
   security:
     jwt:
