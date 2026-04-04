@@ -44,11 +44,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         .toList();
 
 
-                // Token geçerliyse, kullanıcıyı "Doğrulanmış" kabul ediyoruz.
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        subject, // Principal (Kullanıcı email'i)
+                        subject,
                         null,
-                        authorities // Şimdilik boş yetkiler (Roles claim'den gelecek)
+                        authorities
                 );
 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
