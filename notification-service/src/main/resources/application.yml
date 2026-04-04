@@ -18,8 +18,8 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json:
-          value.default.type: org.esrakonya.backend.common.event.ProductCreatedEvent
-          trusted.packages: org.esrakonya.backend.common.event
+          value.default.type: org.esrakonya.backend.common.core.event.ProductCreatedEvent
+          trusted.packages: org.esrakonya.backend.common.core
         observation.enabled: true
       retry:
         max-attempts: 3
