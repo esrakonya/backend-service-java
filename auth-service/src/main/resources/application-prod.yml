@@ -4,6 +4,8 @@ app:
 
 spring:
   jpa:
+    hibernate:
+      ddl-auto: update
     show-sql: false
 
   data:
@@ -22,3 +24,8 @@ logging:
 
 logstash:
   host: ${LOGSTASH_HOST:marketplace-logstash}
+
+management:
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_URL}

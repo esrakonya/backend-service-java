@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@EqualsAndHashCode(callSuper = true) // Senior detayı: Anne sınıfın ID'sini de hesaba katar
+@EqualsAndHashCode(callSuper = true)
 public class UserEntity extends BaseEntity implements UserDetails {
 
     @Id
