@@ -6,7 +6,7 @@ global:
   config:
     kafkaBrokers: "marketplace-kafka:29092"
     logstashHost: "marketplace-logstash"
-    zipkinUrl: "http://marketplace-zipkin:9411"
+    zipkinUrl: "http://marketplace-zipkin:9411/api/v2/spans"
     postgresUrl: "jdbc:postgresql://marketplace-postgres:5432/marketplace_db"
   secrets:
     postgresUser: "esra"
@@ -47,7 +47,7 @@ services:
     image: esrakonya/inventory-service
     port: 8080
     env:
-      - name: SPRING_DOC_API_DOCS_PATH
+      - name: SPRINGDOC_API_DOCS_PATH
         value: "/api/v1/inventory/v3/api-docs"
   notification:
     name: notification-service
