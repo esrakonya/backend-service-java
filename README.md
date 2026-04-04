@@ -1,47 +1,72 @@
-# Secure Distributed Marketplace Backend 
+# Distributed Marketplace Backend
 
-A professional-grade, resilient, and event-driven backend system built with **Spring Boot 3.2** and **Java 17**. This project serves as a comprehensive demonstration of modern distributed system patterns, including asynchronous messaging, distributed caching, and high-concurrency data integrity.
+The primary goal of this repository is to demonstrate how to handle common challenges in distributed systems—specifically focusing on **data consistency**, **asynchronous messaging**, and **infrastructure automation**. It started as a monolith and was intentionally refactored into microservices to explore patterns like Event-Driven Architecture and Container Orchestration.
 
-## Key Engineering Accomplishments
+## System Architecture
 
-### 1. Event-Driven Architecture (EDA) & Resilience
-- **Message Broker:** Integrated **Apache Kafka** for decoupled domain communication.
-- **Non-blocking Retries:** Implemented a robust retry mechanism using `@RetryableTopic` with **Exponential Backoff** (2s, 4s, 8s...) to handle transient failures.
-- **Fault Tolerance:** Automated message routing to **Dead Letter Topics (DLT)** after maximum retries to ensure zero data loss and manual intervention capabilities.
-- **Transactional Consistency:** Utilized `TransactionSynchronizationManager` to implement the **Transactional Event Publishing** pattern, ensuring events are only sent to Kafka after a successful database commit.
+The project is structured as a **Maven Multi-Module** system, consisting of 6 specialized modules and a shared kernel:
 
-### 2. Concurrency Control & Data Integrity
-- **Strategic Locking:** Implemented **Pessimistic Locking** (`@Lock(LockModeType.PESSIMISTIC_WRITE)`) to manage high-contention inventory updates, preventing "Lost Updates" and overselling.
-- **Stress Tested:** Verified logic through a multi-threaded integration suite using `ExecutorService` and `CountDownLatch` to simulate simultaneous purchase bursts.
+*   **API Gateway:** Reactive entry point using **Spring Cloud Gateway**. Handles centralized routing, rate limiting, and global security filters.
+*   **Auth Service:** The IAM (Identity & Access Management) hub. Manages RBAC (Role-Based Access Control) using stateless **JWT** and **BCrypt** hashing.
+*   **Product Service:** Managed product catalog featuring **Redis Caching** (Cache-Aside pattern) and Kafka event publishing.
+*   **Inventory Service:** A critical consistency layer. Implements **Pessimistic Locking** (`SELECT FOR UPDATE`) to prevent overselling during high-concurrency bursts.
+*   **Notification Service:** An asynchronous Kafka consumer that provides real-time alerting without blocking core business flows.
+*   **Marketplace Common:** The **Shared Kernel** (Core, Web, Persistence). Centralizes DTOs, Event Contracts, and Global Exception Handling to ensure architectural DRYness.
 
-### 3. Distributed Performance Optimization
-- **Caching Layer:** Integrated **Redis** using the **Cache-Aside Pattern**.
-- **Consistency:** Implemented `@Cacheable` for lightning-fast reads and `@CacheEvict` (All-Entries strategy) for immediate data consistency upon updates.
-- **Resource Management:** Optimized database I/O, reducing PostgreSQL load for frequently accessed metadata.
+---
 
-### 4. Security & Identity Management
-- **Stateless Auth:** Implemented **Spring Security 6** with **JWT (JSON Web Tokens)**.
-- **RBAC:** Fine-grained **Role-Based Access Control** implemented at the method level using `@PreAuthorize`.
-- **Custom Identity:** Integrated a custom `UserDetailsService` with dynamic role-prefixing (`ROLE_`) for full Spring Security compatibility.
+## The Engineering Deep Dive
 
-### 5. Automated Infrastructure Verification
-- **Testcontainers:** Eliminated "works on my machine" issues by using real **PostgreSQL** and **Kafka** Docker containers for integration testing.
-- **Isolated Testing:** Enforced strict test isolation using transactional rollbacks and dynamic Kafka group IDs.
+### 1. Data Integrity & Concurrency
+In a distributed environment, "race conditions" are the enemy. I implemented a strict concurrency control mechanism in the **Inventory Service**. By using JPA Pessimistic Locking, the system ensures that stock updates are atomic at the database level, verified through multi-threaded stress tests.
 
-## Tech Stack
-- **Backend:** Java 17 (LTS), Spring Boot 3.2.5, JPA/Hibernate.
-- **Security:** Spring Security 6, JJWT (v0.11.5).
-- **Middleware:** Apache Kafka, Redis 7 (Alpine).
-- **Database:** PostgreSQL 16.
-- **Tools:** MapStruct (Type-safe mapping), Lombok, Jakarta Validation.
-- **Documentation:** SpringDoc OpenAPI / Swagger UI.
+### 2. Event-Driven Reliability (Apache Kafka)
+Service communication is decoupled using Kafka. To ensure no data is lost during transit:
+*   **Non-blocking Retries:** Implemented with exponential backoff.
+*   **Dead Letter Topics (DLT):** Failed messages are routed for manual inspection.
+*   **Transactional Messaging:** Utilized `TransactionSynchronizationManager` to ensure Kafka events are only dispatched *after* the database commit (Atomic Commit pattern).
 
-## Testing Strategy
-I follow a "Safety-First" build philosophy. Every build is verified by:
-1. **Unit Tests:** Mockito-based isolated logic testing.
-2. **Full-Cycle Integration Tests:** Real infrastructure verification using Testcontainers.
-3. **Concurrency Tests:** Multi-threaded stress testing for race-condition prevention.
+### 3. Full-Stack Observability
+"If you can't measure it, you can't manage it." The system features a production-grade observability stack:
+*   **Distributed Tracing:** Integrated **Zipkin** with **B3 Propagation**. A single request can be tracked across the Gateway, Kafka, and multiple services via a unique **Trace ID**.
+*   **Centralized Logging:** All 14 containers stream structured JSON logs to **Logstash**, which are indexed in **Elasticsearch** and visualized in **Kibana (ELK Stack)**.
+*   **Metrics:** **Prometheus** scrapes metrics from Spring Actuator endpoints, visualized in custom **Grafana** dashboards.
 
-To run the full test suite:
-```bash
-mvn clean test
+---
+
+## DevOps & Cloud Native Infrastructure
+
+The entire fleet is orchestrated using **Kubernetes** and automated via a modern **CI/CD** pipeline.
+
+*   **Orchestration:** Managed by **Helm Charts**. All deployments are templated and parameterized via `values.yaml`.
+*   **Infrastructure as Code:** Local K8s cluster (Docker Desktop) running 14 stable pods.
+*   **Automated Secrets:** Sensitive data (Postgres passwords, JWT keys) are managed via **GitHub Secrets** and injected into **K8s Secrets** at runtime—ensuring zero sensitive data in the repository.
+*   **Optimization:** Dockerfiles are multi-stage and optimized for **ARM64 (Mac M3)** architecture, running as **non-root** users for enhanced security.
+
+---
+
+## Technical Challenges Solved
+
+*   **Circular Dependency Resolution:** Solved the Auth/Common module loop by abstracting security contracts into the Shared Kernel.
+*   **Gateway Synchronization:** Fixed YAML override issues to aggregate Swagger documentation from all services into a single UI.
+*   **Multi-Module Component Scanning:** Implemented `scanBasePackages` and `EntityScan` strategies to allow Spring to discover components across different JAR modules.
+*   **Native DNS Fixes:** Resolved Netty resolver issues specific to Apple Silicon during cloud-native development.
+
+---
+
+## Getting Started
+
+### Requirements
+*   Java 17 / Maven 3.9
+*   Docker Desktop (K8s Enabled)
+*   Helm 3.x
+
+### Deployment
+1. **Clone the Repo:** `git clone https://github.com/esrakonya/backend-service-java.git`
+2. **Build JARs:** `mvn clean package -DskipTests`
+3. **Deploy Infrastructure:** `helm upgrade --install marketplace ./helm-charts/marketplace`
+4. **Access APIs:** Gateway is exposed at `http://localhost:8080/swagger-ui.html`
+
+---
+**Author:** [Esra Konya](https://github.com/esrakonya)  
+*Java Backend Engineer focused on Distributed Systems.*
