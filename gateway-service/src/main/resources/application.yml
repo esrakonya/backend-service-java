@@ -28,6 +28,20 @@ spring:
           predicates:
             - Path=/api/v1/inventory/**
 
+resilience4j:
+  circuitbreaker:
+    instances:
+      productServiceCircuitBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+  timelimiter:
+    instances:
+      productServiceCircuitBreaker:
+        timeoutDuration: 5s
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
