@@ -1,72 +1,55 @@
-# Distributed Marketplace Backend
+# Distributed Marketplace (Backend)
 
-The primary goal of this repository is to demonstrate how to handle common challenges in distributed systems—specifically focusing on **data consistency**, **asynchronous messaging**, and **infrastructure automation**. It started as a monolith and was intentionally refactored into microservices to explore patterns like Event-Driven Architecture and Container Orchestration.
+This is a microservices-based project built with **Java 17** and **Spring Boot 3.2**. I started this project as a monolith and gradually refactored it into a distributed architecture to learn how to solve common challenges in modern software development, such as service communication, data consistency, and cloud-native deployment.
 
 ## System Architecture
 
-The project is structured as a **Maven Multi-Module** system, consisting of 6 specialized modules and a shared kernel:
+The project is structured using **Maven Multi-Module**, consisting of the following services:
 
-*   **API Gateway:** Reactive entry point using **Spring Cloud Gateway**. Handles centralized routing, rate limiting, and global security filters.
-*   **Auth Service:** The IAM (Identity & Access Management) hub. Manages RBAC (Role-Based Access Control) using stateless **JWT** and **BCrypt** hashing.
-*   **Product Service:** Managed product catalog featuring **Redis Caching** (Cache-Aside pattern) and Kafka event publishing.
-*   **Inventory Service:** A critical consistency layer. Implements **Pessimistic Locking** (`SELECT FOR UPDATE`) to prevent overselling during high-concurrency bursts.
-*   **Notification Service:** An asynchronous Kafka consumer that provides real-time alerting without blocking core business flows.
-*   **Marketplace Common:** The **Shared Kernel** (Core, Web, Persistence). Centralizes DTOs, Event Contracts, and Global Exception Handling to ensure architectural DRYness.
+*   **Gateway Service:** The entry point for all requests, handling routing and basic fault tolerance with **Resilience4j**.
+*   **Auth Service:** Manages user authentication and authorization using **JWT** and **Spring Security 6**.
+*   **Product Service:** Handles product listings and uses **Redis** for simple caching.
+*   **Inventory Service:** Manages stock levels and ensures data integrity during concurrent updates.
+*   **Notification Service:** A separate service that listens to **Kafka** topics to process notifications.
+*   **Marketplace Common:** A shared library used by all services for common DTOs, events, and utilities.
 
----
+## Key Features & Learning Points
 
-## The Engineering Deep Dive
+### 1. Handling Concurrency
+In the **Inventory Service**, I implemented **Pessimistic Locking** (`SELECT FOR UPDATE`) to prevent issues where multiple orders might try to deduct the same stock item simultaneously. This ensures data integrity under high-load scenarios.
 
-### 1. Data Integrity & Concurrency
-In a distributed environment, "race conditions" are the enemy. I implemented a strict concurrency control mechanism in the **Inventory Service**. By using JPA Pessimistic Locking, the system ensures that stock updates are atomic at the database level, verified through multi-threaded stress tests.
+### 2. Message-Driven Communication
+I integrated **Apache Kafka** to allow services to communicate asynchronously. Key learnings include:
+*   **Transactional Events:** Ensuring a message is sent to the broker only after a successful database commit.
+*   **Error Handling:** Basic retry mechanisms for consumer resilience.
 
-### 2. Event-Driven Reliability (Apache Kafka)
-Service communication is decoupled using Kafka. To ensure no data is lost during transit:
-*   **Non-blocking Retries:** Implemented with exponential backoff.
-*   **Dead Letter Topics (DLT):** Failed messages are routed for manual inspection.
-*   **Transactional Messaging:** Utilized `TransactionSynchronizationManager` to ensure Kafka events are only dispatched *after* the database commit (Atomic Commit pattern).
+### 3. Monitoring & Observability
+To gain visibility into the distributed system, I integrated:
+*   **Zipkin:** To trace request flows from the Gateway through various backend services.
+*   **ELK Stack:** Collecting and centralizing logs from all 14 containers for easier debugging and monitoring.
 
-### 3. Full-Stack Observability
-"If you can't measure it, you can't manage it." The system features a production-grade observability stack:
-*   **Distributed Tracing:** Integrated **Zipkin** with **B3 Propagation**. A single request can be tracked across the Gateway, Kafka, and multiple services via a unique **Trace ID**.
-*   **Centralized Logging:** All 14 containers stream structured JSON logs to **Logstash**, which are indexed in **Elasticsearch** and visualized in **Kibana (ELK Stack)**.
-*   **Metrics:** **Prometheus** scrapes metrics from Spring Actuator endpoints, visualized in custom **Grafana** dashboards.
+## Infrastructure & DevOps
 
----
+The project is fully containerized and designed for a **Kubernetes** environment.
 
-## DevOps & Cloud Native Infrastructure
-
-The entire fleet is orchestrated using **Kubernetes** and automated via a modern **CI/CD** pipeline.
-
-*   **Orchestration:** Managed by **Helm Charts**. All deployments are templated and parameterized via `values.yaml`.
-*   **Infrastructure as Code:** Local K8s cluster (Docker Desktop) running 14 stable pods.
-*   **Automated Secrets:** Sensitive data (Postgres passwords, JWT keys) are managed via **GitHub Secrets** and injected into **K8s Secrets** at runtime—ensuring zero sensitive data in the repository.
-*   **Optimization:** Dockerfiles are multi-stage and optimized for **ARM64 (Mac M3)** architecture, running as **non-root** users for enhanced security.
-
----
+*   **Docker & Compose:** Used to manage the development environment with 13+ containers (Services, DBs, Kafka, etc.).
+*   **Kubernetes & Helm:** Packaged as a **Helm Chart** to simplify deployment and configuration management on a K8s cluster.
+*   **CI/CD:** Automated the build process and Docker image creation using **GitHub Actions**.
 
 ## Technical Challenges Solved
 
-*   **Circular Dependency Resolution:** Solved the Auth/Common module loop by abstracting security contracts into the Shared Kernel.
-*   **Gateway Synchronization:** Fixed YAML override issues to aggregate Swagger documentation from all services into a single UI.
-*   **Multi-Module Component Scanning:** Implemented `scanBasePackages` and `EntityScan` strategies to allow Spring to discover components across different JAR modules.
-*   **Native DNS Fixes:** Resolved Netty resolver issues specific to Apple Silicon during cloud-native development.
+*   **Dependency Management:** Structuring the project into 6 modules while maintaining a clean dependency graph without circular references.
+*   **Environment Configuration:** Moving sensitive data (like passwords and secrets) out of the code and into **K8s Secrets** and **Environment Variables**.
+*   **Service Discovery:** Configuring the API Gateway to correctly route traffic to internal services within the Kubernetes cluster.
 
----
+## How to Run
 
-## Getting Started
+### Prerequisites
+*   Java 17 & Maven
+*   Docker Desktop (with Kubernetes enabled)
+*   Helm
 
-### Requirements
-*   Java 17 / Maven 3.9
-*   Docker Desktop (K8s Enabled)
-*   Helm 3.x
-
-### Deployment
-1. **Clone the Repo:** `git clone https://github.com/esrakonya/backend-service-java.git`
-2. **Build JARs:** `mvn clean package -DskipTests`
-3. **Deploy Infrastructure:** `helm upgrade --install marketplace ./helm-charts/marketplace`
-4. **Access APIs:** Gateway is exposed at `http://localhost:8080/swagger-ui.html`
-
----
-**Author:** [Esra Konya](https://github.com/esrakonya)  
-*Java Backend Engineer focused on Distributed Systems.*
+### Steps
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/esrakonya/backend-service-java.git
