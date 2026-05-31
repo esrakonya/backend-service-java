@@ -4,6 +4,38 @@ This is a microservices-based project built with **Java 17** and **Spring Boot 3
 
 ## System Architecture
 
+```mermaid
+graph TD
+    Client[Client / Postman] -->|HTTP Request| Gateway[API Gateway :8080]
+    
+    subgraph "Microservices Layer"
+        Gateway --> Auth[Auth Service :8081]
+        Gateway --> Product[Product Service :8082]
+        Gateway --> Inventory[Inventory Service :8083]
+        Gateway --> Notification[Notification Service :8084]
+    end
+
+    subgraph "Persistence & Infrastructure"
+        Product --- Redis[(Marketplace Redis)]
+        Auth --- DB[(Marketplace Postgres)]
+        Product --- DB
+        Inventory --- DB
+    end
+
+    subgraph "Event-Driven (Kafka)"
+        Product ==>|ProductCreatedEvent| Kafka{Apache Kafka}
+        Kafka ==> Inventory
+        Kafka ==> Notification
+    end
+
+    subgraph "Observability Stack"
+        ELK[ELK Stack] --- Zipkin[Zipkin Tracing]
+        Auth -.-> ELK
+        Product -.-> ELK
+        Inventory -.-> ELK
+    end
+```
+
 The project is structured using **Maven Multi-Module**, consisting of the following services:
 
 *   **Gateway Service:** The entry point for all requests, handling routing and basic fault tolerance with **Resilience4j**.
@@ -26,13 +58,13 @@ I integrated **Apache Kafka** to allow services to communicate asynchronously. K
 ### 3. Monitoring & Observability
 To gain visibility into the distributed system, I integrated:
 *   **Zipkin:** To trace request flows from the Gateway through various backend services.
-*   **ELK Stack:** Collecting and centralizing logs from all 14 containers for easier debugging and monitoring.
+*   **ELK Stack:** Collecting and centralizing logs from all 13 containers for easier debugging and monitoring.
 
 ## Infrastructure & DevOps
 
 The project is fully containerized and designed for a **Kubernetes** environment.
 
-*   **Docker & Compose:** Used to manage the development environment with 13+ containers (Services, DBs, Kafka, etc.).
+*   **Docker & Compose:** Used to manage the development environment with 13 containers (Services, DBs, Kafka, etc.).
 *   **Kubernetes & Helm:** Packaged as a **Helm Chart** to simplify deployment and configuration management on a K8s cluster.
 *   **CI/CD:** Automated the build process and Docker image creation using **GitHub Actions**.
 
@@ -41,6 +73,13 @@ The project is fully containerized and designed for a **Kubernetes** environment
 *   **Dependency Management:** Structuring the project into 6 modules while maintaining a clean dependency graph without circular references.
 *   **Environment Configuration:** Moving sensitive data (like passwords and secrets) out of the code and into **K8s Secrets** and **Environment Variables**.
 *   **Service Discovery:** Configuring the API Gateway to correctly route traffic to internal services within the Kubernetes cluster.
+
+### Load Test Results (k6)
+The reliability of the inventory locking mechanism was verified with k6:
+- **Concurrency:** 50 Virtual Users
+- **Throughput:** ~479 requests/sec
+- **p95 Latency:** 77ms (under lock contention)
+- **Data Integrity:** 100% success (0 overselling) verified via DB audit.
 
 ## How to Run
 
