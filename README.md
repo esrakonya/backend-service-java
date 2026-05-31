@@ -77,9 +77,9 @@ The project is fully containerized and designed for a **Kubernetes** environment
 ### Load Test Results (k6)
 The reliability of the inventory locking mechanism was verified with k6:
 - **Concurrency:** 50 Virtual Users
-- **Throughput:** ~479 requests/sec
-- **p95 Latency:** 77ms (under lock contention)
-- **Data Integrity:** 100% success (0 overselling) verified via DB audit.
+- **Throughput:** ~5,000 requests/sec
+- **p95 Latency:** 52ms (under lock contention)
+- **Data Integrity:** Exactly 1,000/1,000 units sold, 0 overselling verified via DB query.
 
 ## How to Run
 
