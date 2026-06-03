@@ -1,6 +1,6 @@
 # Distributed Marketplace (Backend)
 
-This is a microservices-based project built with **Java 17** and **Spring Boot 3.2**. I started this project as a monolith and gradually refactored it into a distributed architecture to learn how to solve common challenges in modern software development, such as service communication, data consistency, and cloud-native deployment.
+This is a microservices-based project built with **Java** and **Spring Boot**. I started this project as a monolith and gradually refactored it into a distributed architecture to learn how to solve common challenges in modern software development, such as service communication, data consistency, and cloud-native deployment.
 
 ## System Architecture
 
