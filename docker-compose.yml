@@ -1,5 +1,3 @@
-version: '3.8'
-
 x-common-env: &common-env
   SPRING_PROFILES_ACTIVE: prod
   SPRING_DATASOURCE_URL: jdbc:postgresql://marketplace-postgres:5432/marketplace_db

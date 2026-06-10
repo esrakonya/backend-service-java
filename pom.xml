@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.5</version>
+        <version>3.3.1</version>
         <relativePath/>
     </parent>
 
@@ -36,13 +36,27 @@
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <micrometer-tracing.version>1.2.5</micrometer-tracing.version>
-        <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
+        <testcontainers.version>1.20.6</testcontainers.version>
+        <docker-java.version>3.4.1</docker-java.version>
     </properties>
-
 
     <dependencyManagement>
         <dependencies>
+            <!-- Mapstruct Versiyon Yönetimi -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <!-- Lombok Versiyon Yönetimi -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- Internal Modules -->
             <dependency>
                 <groupId>org.esrakonya.backend</groupId>
                 <artifactId>marketplace-common-core</artifactId>
@@ -59,14 +73,6 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- Mapstruct -->
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct</artifactId>
-                <version>${mapstruct.version}</version>
-            </dependency>
-
-            <!-- Spring Cloud & Micrometer BOMs -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -74,17 +80,29 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>micrometer-tracing-bom</artifactId>
-                <version>${micrometer-tracing.version}</version>
+                <groupId>com.github.docker-java</groupId>
+                <artifactId>docker-java-api</artifactId>
+                <version>${docker-java.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.github.docker-java</groupId>
+                <artifactId>docker-java-transport-httpclient5</artifactId>
+                <version>${docker-java.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <!-- Global Dependencies -->
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -95,30 +113,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <!-- Tracing & Logging Engine -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-tracing-bridge-brave</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-observation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zipkin.reporter2</groupId>
-            <artifactId>zipkin-reporter-brave</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>${logstash-logback-encoder.version}</version>
         </dependency>
     </dependencies>
 
@@ -146,6 +140,17 @@
                             <version>${mapstruct.version}</version>
                         </path>
                     </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <DOCKER_API_VERSION>1.44</DOCKER_API_VERSION>
+                        <com.github.dockerjava.api.version>1.44</com.github.dockerjava.api.version>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

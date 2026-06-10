@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca968ea9-2f93-4147-93d5-440f19e01704" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/helm-charts/marketplace/values.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/helm-charts/marketplace/values.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/src/test/resources/docker-java.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/esrakonya/backend/inventory/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/org/esrakonya/backend/inventory/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace-common-persistence/src/main/java/org/esrakonya/backend/common/persistence/model/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace-common-persistence/src/main/java/org/esrakonya/backend/common/persistence/model/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/base/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/base/BaseIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/base/FullInfrastructureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/base/FullInfrastructureTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +36,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -38,6 +50,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;JUnit.ProductIntegrationTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ProductIntegrationTest.shouldHandleConcurrentSales.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -71,7 +84,22 @@
       <recent name="org.esrakonya.backend.product" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.ProductIntegrationTest">
+    <configuration name="ProductIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="product-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.esrakonya.backend.product.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.esrakonya.backend.product" />
+      <option name="MAIN_CLASS_NAME" value="org.esrakonya.backend.product.ProductIntegrationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ProductIntegrationTest.shouldHandleConcurrentSales" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend-service-java" />
       <extension name="coverage">
@@ -90,6 +118,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProductIntegrationTest" />
         <item itemvalue="JUnit.ProductIntegrationTest.shouldHandleConcurrentSales" />
       </list>
     </recent_temporary>

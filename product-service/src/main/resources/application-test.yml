@@ -6,11 +6,16 @@ app:
   message: Product Service Testing Environment
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
+
   cache:
     type: none
+
   sql:
     init:
       mode: never
+
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -18,4 +23,6 @@ spring:
 
 logging:
   level:
-    org.esrakonya.backend: DEBUG
+    root: INFO
+    org.springframework: WARN
+    org.testcontainers: INFO
