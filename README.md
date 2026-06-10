@@ -1,6 +1,6 @@
 # Distributed Marketplace (Backend)
 
-This is a microservices-based project built with **Java** and **Spring Boot**. I started this project as a monolith and gradually refactored it into a distributed architecture to learn how to solve common challenges in modern software development, such as service communication, data consistency, and cloud-native deployment.
+This is a microservices-based project built with **Java 17** and **Spring Boot 3.3.1**. I started this project as a monolith and gradually refactored it into a distributed architecture to learn how to solve common challenges in modern software development, such as service communication, data consistency, and cloud-native deployment.
 
 ## System Architecture
 
@@ -80,6 +80,12 @@ The reliability of the inventory locking mechanism was verified with k6:
 - **Throughput:** ~5,000 requests/sec
 - **p95 Latency:** 52ms (under lock contention)
 - **Data Integrity:** Exactly 1,000/1,000 units sold, 0 overselling verified via DB query.
+
+### Note for Apple Silicon (M1/M2/M3) Users
+This project is optimized for ARM64 architecture and Docker Desktop v29+.
+To ensure a seamless development experience:
+- Enable **"Allow the default Docker socket to be used"** in Docker Desktop Advanced Settings.
+- The project is pre-configured to force **Docker API v1.44** via centralized Maven settings to resolve compatibility issues between modern Docker engines and Testcontainers.
 
 ## How to Run
 
