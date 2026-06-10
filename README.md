@@ -1,47 +1,94 @@
-# Secure Distributed Marketplace Backend 
+# Distributed Marketplace (Backend)
 
-A professional-grade, resilient, and event-driven backend system built with **Spring Boot 3.2** and **Java 17**. This project serves as a comprehensive demonstration of modern distributed system patterns, including asynchronous messaging, distributed caching, and high-concurrency data integrity.
+This is a microservices-based project built with **Java** and **Spring Boot**. I started this project as a monolith and gradually refactored it into a distributed architecture to learn how to solve common challenges in modern software development, such as service communication, data consistency, and cloud-native deployment.
 
-## Key Engineering Accomplishments
+## System Architecture
 
-### 1. Event-Driven Architecture (EDA) & Resilience
-- **Message Broker:** Integrated **Apache Kafka** for decoupled domain communication.
-- **Non-blocking Retries:** Implemented a robust retry mechanism using `@RetryableTopic` with **Exponential Backoff** (2s, 4s, 8s...) to handle transient failures.
-- **Fault Tolerance:** Automated message routing to **Dead Letter Topics (DLT)** after maximum retries to ensure zero data loss and manual intervention capabilities.
-- **Transactional Consistency:** Utilized `TransactionSynchronizationManager` to implement the **Transactional Event Publishing** pattern, ensuring events are only sent to Kafka after a successful database commit.
+```mermaid
+graph TD
+    Client[Client / Postman] -->|HTTP Request| Gateway[API Gateway :8080]
+    
+    subgraph "Microservices Layer"
+        Gateway --> Auth[Auth Service :8081]
+        Gateway --> Product[Product Service :8082]
+        Gateway --> Inventory[Inventory Service :8083]
+        Gateway --> Notification[Notification Service :8084]
+    end
 
-### 2. Concurrency Control & Data Integrity
-- **Strategic Locking:** Implemented **Pessimistic Locking** (`@Lock(LockModeType.PESSIMISTIC_WRITE)`) to manage high-contention inventory updates, preventing "Lost Updates" and overselling.
-- **Stress Tested:** Verified logic through a multi-threaded integration suite using `ExecutorService` and `CountDownLatch` to simulate simultaneous purchase bursts.
+    subgraph "Persistence & Infrastructure"
+        Product --- Redis[(Marketplace Redis)]
+        Auth --- DB[(Marketplace Postgres)]
+        Product --- DB
+        Inventory --- DB
+    end
 
-### 3. Distributed Performance Optimization
-- **Caching Layer:** Integrated **Redis** using the **Cache-Aside Pattern**.
-- **Consistency:** Implemented `@Cacheable` for lightning-fast reads and `@CacheEvict` (All-Entries strategy) for immediate data consistency upon updates.
-- **Resource Management:** Optimized database I/O, reducing PostgreSQL load for frequently accessed metadata.
+    subgraph "Event-Driven (Kafka)"
+        Product ==>|ProductCreatedEvent| Kafka{Apache Kafka}
+        Kafka ==> Inventory
+        Kafka ==> Notification
+    end
 
-### 4. Security & Identity Management
-- **Stateless Auth:** Implemented **Spring Security 6** with **JWT (JSON Web Tokens)**.
-- **RBAC:** Fine-grained **Role-Based Access Control** implemented at the method level using `@PreAuthorize`.
-- **Custom Identity:** Integrated a custom `UserDetailsService` with dynamic role-prefixing (`ROLE_`) for full Spring Security compatibility.
+    subgraph "Observability Stack"
+        ELK[ELK Stack] --- Zipkin[Zipkin Tracing]
+        Auth -.-> ELK
+        Product -.-> ELK
+        Inventory -.-> ELK
+    end
+```
 
-### 5. Automated Infrastructure Verification
-- **Testcontainers:** Eliminated "works on my machine" issues by using real **PostgreSQL** and **Kafka** Docker containers for integration testing.
-- **Isolated Testing:** Enforced strict test isolation using transactional rollbacks and dynamic Kafka group IDs.
+The project is structured using **Maven Multi-Module**, consisting of the following services:
 
-## Tech Stack
-- **Backend:** Java 17 (LTS), Spring Boot 3.2.5, JPA/Hibernate.
-- **Security:** Spring Security 6, JJWT (v0.11.5).
-- **Middleware:** Apache Kafka, Redis 7 (Alpine).
-- **Database:** PostgreSQL 16.
-- **Tools:** MapStruct (Type-safe mapping), Lombok, Jakarta Validation.
-- **Documentation:** SpringDoc OpenAPI / Swagger UI.
+*   **Gateway Service:** The entry point for all requests, handling routing and basic fault tolerance with **Resilience4j**.
+*   **Auth Service:** Manages user authentication and authorization using **JWT** and **Spring Security 6**.
+*   **Product Service:** Handles product listings and uses **Redis** for simple caching.
+*   **Inventory Service:** Manages stock levels and ensures data integrity during concurrent updates.
+*   **Notification Service:** A separate service that listens to **Kafka** topics to process notifications.
+*   **Marketplace Common:** A shared library used by all services for common DTOs, events, and utilities.
 
-## Testing Strategy
-I follow a "Safety-First" build philosophy. Every build is verified by:
-1. **Unit Tests:** Mockito-based isolated logic testing.
-2. **Full-Cycle Integration Tests:** Real infrastructure verification using Testcontainers.
-3. **Concurrency Tests:** Multi-threaded stress testing for race-condition prevention.
+## Key Features & Learning Points
 
-To run the full test suite:
-```bash
-mvn clean test
+### 1. Handling Concurrency
+In the **Inventory Service**, I implemented **Pessimistic Locking** (`SELECT FOR UPDATE`) to prevent issues where multiple orders might try to deduct the same stock item simultaneously. This ensures data integrity under high-load scenarios.
+
+### 2. Message-Driven Communication
+I integrated **Apache Kafka** to allow services to communicate asynchronously. Key learnings include:
+*   **Transactional Events:** Ensuring a message is sent to the broker only after a successful database commit.
+*   **Error Handling:** Basic retry mechanisms for consumer resilience.
+
+### 3. Monitoring & Observability
+To gain visibility into the distributed system, I integrated:
+*   **Zipkin:** To trace request flows from the Gateway through various backend services.
+*   **ELK Stack:** Collecting and centralizing logs from all 13 containers for easier debugging and monitoring.
+
+## Infrastructure & DevOps
+
+The project is fully containerized and designed for a **Kubernetes** environment.
+
+*   **Docker & Compose:** Used to manage the development environment with 13 containers (Services, DBs, Kafka, etc.).
+*   **Kubernetes & Helm:** Packaged as a **Helm Chart** to simplify deployment and configuration management on a K8s cluster.
+*   **CI/CD:** Automated the build process and Docker image creation using **GitHub Actions**.
+
+## Technical Challenges Solved
+
+*   **Dependency Management:** Structuring the project into 6 modules while maintaining a clean dependency graph without circular references.
+*   **Environment Configuration:** Moving sensitive data (like passwords and secrets) out of the code and into **K8s Secrets** and **Environment Variables**.
+*   **Service Discovery:** Configuring the API Gateway to correctly route traffic to internal services within the Kubernetes cluster.
+
+### Load Test Results (k6)
+The reliability of the inventory locking mechanism was verified with k6:
+- **Concurrency:** 50 Virtual Users
+- **Throughput:** ~5,000 requests/sec
+- **p95 Latency:** 52ms (under lock contention)
+- **Data Integrity:** Exactly 1,000/1,000 units sold, 0 overselling verified via DB query.
+
+## How to Run
+
+### Prerequisites
+*   Java 17 & Maven
+*   Docker Desktop (with Kubernetes enabled)
+*   Helm
+
+### Steps
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/esrakonya/backend-service-java.git
