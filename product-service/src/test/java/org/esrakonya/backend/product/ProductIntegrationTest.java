@@ -1,8 +1,8 @@
 package org.esrakonya.backend.product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.esrakonya.backend.common.test.FullInfrastructureTest;
 import org.esrakonya.backend.common.web.security.service.TokenService;
-import org.esrakonya.backend.product.base.FullInfrastructureTest;
 import org.esrakonya.backend.product.domain.CategoryEntity;
 import org.esrakonya.backend.product.domain.ProductEntity;
 import org.esrakonya.backend.product.dto.CategoryRequest;

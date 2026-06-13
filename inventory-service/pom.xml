@@ -31,6 +31,11 @@
             <artifactId>marketplace-common-web</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.esrakonya.backend</groupId>
+            <artifactId>marketplace-common-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Database & Messaging: PostgreSQL for ACID and Kafka for Eventual Consistency -->
         <dependency>
