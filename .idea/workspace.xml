@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca968ea9-2f93-4147-93d5-440f19e01704" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/auth-service/src/test/java/org/esrakonya/backend/auth/AuthIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/inventory-service/src/test/java/org/esrakonya/backend/inventory/InventoryIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/marketplace-common-test/src/main/java/org/esrakonya/backend/common/test/BaseIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/marketplace-common-test/src/main/java/org/esrakonya/backend/common/test/FullInfrastructureTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/notification-service/src/test/java/org/esrakonya/backend/notification/NotificationIntegrationTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marketplace-common-test/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace-common-test/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/ProductIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/ProductIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/base/BaseIntegrationTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/base/FullInfrastructureTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/src/test/resources/logback-test.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/src/main/java/org/esrakonya/backend/notification/ProductNotificationConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/src/main/java/org/esrakonya/backend/notification/ProductNotificationConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/src/main/resources/application-test.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -12,6 +12,5 @@ public class ProductNotificationConsumer {
     @KafkaListener(topics = "product-created-topic", groupId = "notification-group")
     public void handleNotification(ProductCreatedEvent event) {
         log.info("NOTIFICATION SERVICE: Sending alert for new product: {}", event.getName());
-        // Sadece bildirim mantığı burada kalmalı
     }
 }
