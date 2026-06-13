@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca968ea9-2f93-4147-93d5-440f19e01704" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/product-service/src/test/resources/docker-java.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marketplace-common-test/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/org/esrakonya/backend/inventory/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/org/esrakonya/backend/inventory/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marketplace-common-persistence/src/main/java/org/esrakonya/backend/common/persistence/model/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace-common-persistence/src/main/java/org/esrakonya/backend/common/persistence/model/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace-common-core/src/main/java/org/esrakonya/backend/common/core/exception/InsufficientStockException.java" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace-common-core/src/main/java/org/esrakonya/backend/common/core/exception/InsufficientStockException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/base/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/base/BaseIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/base/FullInfrastructureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/test/java/org/esrakonya/backend/product/base/FullInfrastructureTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/src/test/resources/docker-java.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

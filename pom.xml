@@ -13,6 +13,7 @@
         <module>marketplace-common-core</module>
         <module>marketplace-common-web</module>
         <module>marketplace-common-persistence</module>
+        <module>marketplace-common-test</module>
         <module>auth-service</module>
         <module>product-service</module>
         <module>inventory-service</module>
@@ -94,6 +95,12 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>org.esrakonya.backend</groupId>
+                <artifactId>marketplace-common-test</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
                 <version>${testcontainers.version}</version>
@@ -148,7 +155,9 @@
                 <version>3.2.5</version>
                 <configuration>
                     <systemPropertyVariables>
+                        <DOCKER_HOST>unix:///Users/esra/.docker/run/docker.sock</DOCKER_HOST>
                         <DOCKER_API_VERSION>1.44</DOCKER_API_VERSION>
+                        <testcontainers.docker.client.api.version>1.44</testcontainers.docker.client.api.version>
                         <com.github.dockerjava.api.version>1.44</com.github.dockerjava.api.version>
                     </systemPropertyVariables>
                 </configuration>
