@@ -1,4 +1,4 @@
-# Distributed Marketplace (Backend)
+_# Distributed Marketplace (Backend)
 
 This is a microservices-based project built with **Java 17** and **Spring Boot 3.3.1**. I started this project as a monolith and gradually refactored it into a distributed architecture to learn how to solve common challenges in modern software development, such as service communication, data consistency, and cloud-native deployment.
 
@@ -44,11 +44,12 @@ The project is structured using **Maven Multi-Module**, consisting of the follow
 *   **Inventory Service:** Manages stock levels and ensures data integrity during concurrent updates.
 *   **Notification Service:** A separate service that listens to **Kafka** topics to process notifications.
 *   **Marketplace Common:** A shared library used by all services for common DTOs, events, and utilities.
+*   **Marketplace Common Test:** Centralized test kit providing a shared infrastructure for integration tests.
 
 ## Key Features & Learning Points
 
 ### 1. Handling Concurrency
-In the **Inventory Service**, I implemented **Pessimistic Locking** (`SELECT FOR UPDATE`) to prevent issues where multiple orders might try to deduct the same stock item simultaneously. This ensures data integrity under high-load scenarios.
+In the **Inventory Service**, I implemented **Pessimistic Locking** to prevent issues where multiple orders might try to deduct the same stock item simultaneously. This ensures data integrity under high-load scenarios.
 
 ### 2. Message-Driven Communication
 I integrated **Apache Kafka** to allow services to communicate asynchronously. Key learnings include:
@@ -97,4 +98,10 @@ To ensure a seamless development experience:
 ### Steps
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/esrakonya/backend-service-java.git
+   git clone https://github.com/esrakonya/backend-service-java.git_
+2. **Build and test the project:**
+   ```bash
+   mvn clean install
+3. **Run the full stack via Docker Compose:**
+   ```bash
+   docker compose up -d
