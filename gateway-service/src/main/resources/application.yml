@@ -71,7 +71,7 @@ management:
       type: b3
   zipkin:
     tracing:
-      endpoint: ${ZIPKIN_URL:http://marketplace-zipkin:9411/api/v2/spans}
+      endpoint: ${MANAGEMENT_ZIPKIN_TRACING_ENDPOINT:http://marketplace-zipkin:9411/api/v2/spans}
 
 app:
   security:

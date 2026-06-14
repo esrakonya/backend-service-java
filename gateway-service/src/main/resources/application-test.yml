@@ -15,3 +15,9 @@ logging:
   level:
     root: WARN
     org.esrakonya.backend: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

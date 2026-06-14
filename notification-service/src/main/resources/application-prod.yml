@@ -13,4 +13,4 @@ logstash:
 management:
   zipkin:
     tracing:
-      endpoint: ${ZIPKIN_URL}
+      endpoint: ${MANAGEMENT_ZIPKIN_TRACING_ENDPOINT}

@@ -5,5 +5,5 @@ metadata:
 data:
   KAFKA_BROKERS: {{ .Values.global.config.kafkaBrokers | quote }}
   LOGSTASH_HOST: {{ .Values.global.config.logstashHost | quote }}
-  ZIPKIN_URL: {{ .Values.global.config.zipkinUrl | quote }}
+  MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: {{ .Values.global.config.zipkinUrl | quote }}
   POSTGRES_URL: {{ .Values.global.config.postgresUrl | quote }}

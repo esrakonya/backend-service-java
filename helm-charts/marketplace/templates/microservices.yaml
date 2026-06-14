@@ -52,11 +52,15 @@ spec:
                 configMapKeyRef:
                   name: marketplace-common-config
                   key: POSTGRES_URL
-            - name: ZIPKIN_URL
+            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   name: marketplace-common-config
                   key: ZIPKIN_URL
+            - name: MANAGEMENT_TRACING_SAMPLING_PROBABILITY
+              value: "1.0"
+            - name: MANAGEMENT_TRACING_ENABLED
+              value: "true"
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
